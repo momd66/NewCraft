@@ -1,0 +1,181 @@
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+
+
+@import url('https://fonts.googleapis.com/css?family=Nunito:100,300,400,600,700');
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+.profile-card-2 .card-img-block{
+    float:left;
+    width:100%;
+    height:210px;
+    overflow:hidden;
+}
+
+.profile-card-2 .card-body{
+    position:relative;
+}
+.profile-card-2 .profile {
+  border-radius: 50%;
+  position: absolute;
+  top: -42px;
+  left: 60px;
+  max-width: 100px;
+  max-height: 100px;
+  border: 3px solid rgba(255, 255, 255, 1);
+  -webkit-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+  background-color: white;
+ 
+}
+.profile-card-2 h5{
+    font-weight:600;
+    color:#007bff;
+}
+.profile-card-2 .card-text{
+    font-weight:300;
+    font-size:15px;
+}
+.profile-card-2 .icon-block{
+    float:left;
+    width:100%;
+}
+.profile-card-2 .icon-block a{
+    text-decoration:none;
+}
+.profile-card-2 i {
+  display: inline-block;
+    font-size: 30px;
+    color: #007bff;
+    text-align: center;
+    border: 1px solid #007bff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    margin:0 5px;
+}
+.profile-card-2 i:hover {
+  background-color:#007bff;
+  color:#fff;  
+}
+.btnsize{
+	width: 100%;
+}
+.btnsizelg{
+	width: 100%;
+	}
+
+.ProfileName{
+	text-align: center;}
+
+.ProfileDescription{
+	
+}
+
+.ProfileEmail{
+	text-align: center;
+}
+
+.portfolio{
+	padding:6%;
+	text-align:center;
+}
+.heading{
+	background: #fff;
+	padding: 1%;
+	text-align: left;
+	box-shadow: 0px 0px 4px 0px #545b62;
+}
+
+.heading img{
+	width: 10%;
+}
+
+.bio-info{
+	padding: 5%;
+	background:#fff;
+	box-shadow: 0px 0px 4px 0px #b0b3b7;
+}
+
+.name{
+	font-family: 'Charmonman', cursive;
+	font-weight:600;
+}
+
+.bio-image{
+		text-align:center;
+	}
+.bio-image img{
+	border-radius:50%;
+	border: 3px solid white;
+	box-shadow: 0px 0px 5px 0px #b0b3b7;
+	object-fit: cover;
+	background: white;
+}
+
+
+.bio-image img.profile-img:hover{
+	box-shadow: 0px 0px 5px 0px #b0b3b7;
+	-webkit-filter: grayscale(25%); /* Safari 6.0 - 9.0 */
+	filter: grayscale(25%);
+}
+.bio-content{
+	text-align:left;
+}
+.bio-content p{
+	font-weight:600;
+	font-size:30px;
+}
+.lead{
+	text-align: center;
+}
+
+
+.p-img{
+    position: relative;
+    top :10px;
+    left: 35%;
+    z-index: 3;
+    width: 130px;
+    height: 130px;
+}
+
+.b-img{
+    position: absolute !important;
+    object-fit: cover;
+    top: 50px;
+    width: 465px !important;
+    height: 150px !important;
+    border-radius: 4px !important;
+    z-index: 2;
+}
+
+.b-img:hover{
+    box-shadow: 0px 0px 2px 0px #b0b3b7;
+    -webkit-filter: grayscale(25%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(25%);
+
+    }
+
+.b-img-s{
+    position: absolute !important;
+    object-fit: cover;
+    top: 50px;
+    width: 93% !important;
+    height: 150px !important;
+    border-radius:0 !important;
+    border-radius: 4px !important;
+    z-index: 0;
+}
+
+.b-img-s:hover{
+    box-shadow: 0px 0px 2px 0px #b0b3b7;
+    -webkit-filter: grayscale(25%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(25%);
+    }
+
+
+.btn{
+    cursor: pointer !important;
+}

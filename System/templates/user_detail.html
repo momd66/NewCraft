@@ -1,0 +1,1065 @@
+{% extends "base.html" %}
+
+{% block cssblock %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'user_detail/style.css' %}">
+
+{% endblock %}
+
+
+{% block content  %}
+<style type="text/css">
+.blur{
+filter: blur(2px);
+transition: all 1s;
+}
+
+.noblur{
+    transition: all 2s;
+}
+</style>
+<!-- User Profile -->
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7" class="user-profile">
+                <div class="card profile-card-2">
+                    <div class="card-img-block d-md-none ">
+                        <img class="img-fluid blur" id="b_img_S1" width="1200" height="300" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2Fblue0517.jpg%3Fitok%3DV3825voJ&w=400&c=sc&poi=face&q=85" alt="Card image cap" />
+                    </div>
+                    <div class="card-img-block d-none d-md-block">
+                        <img class="img-fluid b-img blur" id="b_img_S2" width="1200" height="300" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2Fblue0517.jpg%3Fitok%3DV3825voJ&w=400&c=sc&poi=face&q=85" alt="Card image cap" />
+                    </div>
+                    <script type="text/javascript">
+                        var b_img_S1 = document.getElementById("b_img_S1")
+                        var b_img_S2 = document.getElementById("b_img_S2")
+
+                        var b_img_B = document.createElement('img')
+                        b_img_B.onload = function(){
+                            b_img_S1.src = this.src
+                            b_img_S1.className = "img-fluid noblur";
+                            b_img_S2.src = this.src
+                            b_img_S2.className = "img-fluid b-img noblur";
+                        }
+                        setTimeout(function(){
+                           b_img_B.src = '{{ profile.background_image.url }}' ;
+                           
+                       },50)
+
+                    </script>
+                    <div class="card-body pt-5">
+                        {% if object.user == user %}
+
+                            <a href="{% url 'profile' %}">
+                                <img width="90" height="90" id="imgProfile" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="profile-image" class="profile"/>
+                            </a>
+
+                            <a href="{% url 'profile' %}"class="userlinkname">
+                                <h5 class="card-title ml-1">{{profile.user}}
+                                    {% if profile.veryfied %}
+                                        <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                    {% endif %}
+
+                                </h5>
+                            </a>
+
+                        {% else %}
+
+                            <img id="imgProfile" width="90" height="90" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="profile-image" class="profile"/>
+                            <h5 class="card-title ml-1">{{profile.user}}
+                                {% if profile.veryfied %}
+                                    <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                {% endif %}
+                            </h5>
+
+                        {% endif %}
+                        <script type="text/javascript">
+                        var img_S = document.getElementById("imgProfile")
+                        var img_B = document.createElement('img')
+                        img_B.onload = function(){
+                            img_S.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B.src = '{{ profile.image.url }}' 
+                        },50)  
+
+                          
+                    </script>
+
+                        {% if user.is_authenticated %}
+
+                            {% if profile.user == user %}
+
+                                    
+                            {% else %}
+                                {% if active.button_status == 'not_friend' %}
+                                    <a data-href='{{profile.api_sent_friend_request_url}}' href="{{profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn"  data-toggle="tooltip" data-placement="top" title="Add to connection"></a> 
+                                    
+                                  
+
+
+                                {% elif active.button_status == 'rec_request' %}
+                                    <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
+
+
+                                {% elif active.button_status == 'friend_request_sent' %}
+                                    <a data-href='{{profile.api_sent_friend_request_url}}' href="{{profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
+
+                                    
+
+
+
+                                {% elif active.button_status == 'friends' %}
+                                    <a data-href='{{profile.api_delete_friend_url}}' href="{{profile.delete_friend_url}}" class="btn btn-info ConnectBtn fa fa-check DFriend" data-toggle="tooltip" data-placement="top" title="Connected"></a>
+
+
+                                {% endif %}
+                                
+                                    
+                            {% endif %}
+
+                        {% else %}
+                                <a href="{% url 'login' %}" type="button" class="btn btn-outline-info ConnectBtn fa fa-user-plus" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
+
+                        {% endif %}
+
+                        <p class="fa fa-calendar "></p>
+                        <p class="{% if profile.veryfied %} dateJoined2 {% else %} dateJoined {% endif %} card-text"> Joined {{profile.user.date_joined|date:"M d Y"}}</p>
+
+                        {% if profile.description == '' %}
+                            <p class="space"></p>
+
+                        {% else %}
+                        <p class="card-text">{{profile.description}}</p>
+
+                        {% endif %}
+
+                        <div class="icon-block">
+
+                            {% if profile.facebock %}
+                                <a href="{{profile.facebock}}" target="_blank">
+                                    <i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="{{profile.facebock|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.twitter %}
+                                <a href="{{profile.twitter}}" target="_blank">
+                                    <i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="{{profile.twitter|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.linkedin %}
+                                <a href="{{profile.linkedin}}" target="_blank">
+                                    <i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="{{profile.linkedin|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.instagram %}
+                                <a href="{{profile.instagram}}" target="_blank">
+                                    <i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" title="{{profile.instagram|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.reddit %}
+                                <a href="{{profile.reddit}}" target="_blank">
+                                    <i class="fa fa-reddit" data-toggle="tooltip" data-placement="top" title="{{profile.reddit|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.snapchat %}
+                                <a href="{{profile.snapchat}}" target="_blank">
+                                    <i class="fa fa-snapchat" data-toggle="tooltip" data-placement="top" title="{{profile.snapchat|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.youtube %}
+                                <a href="{{profile.youtube}}" target="_blank">
+                                    <i class="fa fa-youtube-play" data-toggle="tooltip" data-placement="top" title="{{profile.youtube|truncatechars:25}}"></i>
+                                </a>
+
+                            {% endif %}
+
+                            {% if profile.email %}
+                                <a href="mailto:{{profile.email}}">
+                                    <i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="{{profile.email|truncatechars:15}}"></i>
+                                </a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----------------------------->
+
+
+            <div class="col-lg-5">
+
+            <!-- Friend requests -->
+
+            {% if request.user == active.u %}
+
+
+                {% if active.rec_friend_requests %}
+                <br>
+                <div class="list-group-item mb-1 p-1 topFriends">
+                    <div class="mx-1">
+                       <h3 class="Center">Friend request</h3>
+                    </div>
+                </div>
+                
+                {% for r_request in active.rec_friend_requests %}
+                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 {{r_request.from_user.profile.slug}}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{r_request.from_user.profile.get_absolute_url}}">
+                                    <img width="50" height="50" src="{{r_request.from_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                </a>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{r_request.from_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{r_request.from_user.profile.user|truncatechars:18}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{r_request.from_user.profile.user|truncatechars:13}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{r_request.from_user.profile.user}}                                            
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+                                    </a>
+                                    <a href="{{r_request.from_user.profile.get_absolute_url}}">   
+                                        <small>
+                                            <p class="friendDes d-sm-none d-lg-block {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}">     {{r_request.from_user.profile.description|truncatechars:15}}
+                                            </p>
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}" >       {{r_request.from_user.profile.description|truncatechars:35}}
+                                            </p>
+                                        </small>
+                                    </a>
+                                </div>
+                                <small><a data-href='{{r_request.from_user.profile.api_accept_friend_url}}' class="btn btn-primary AcceptBtn fa fa-check" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.accept_friend_url}}" data-toggle="tooltip" data-placement="top" title="Accept"></a></small>
+
+                                <small><a data-href='{{r_request.from_user.profile.api_delete_friend_request_url}}' class="btn btn-secondary IgnoreBtn fa fa-times" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.delete_friend_request_url}}" data-toggle="tooltip" data-placement="top" title="Ignore"></a></small>
+                               
+                            </div>
+                      </div>
+
+              {% endfor %}
+
+                    <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" 
+                        data-toggle="modal" data-target="#FriendRequestModal">
+                        <div class="mx-1 ">
+                            <p class="lead Center">Show all</p>
+                        </div>
+                    </a>
+            {% endif %}
+
+
+
+
+                <!-- Friend request Modal -->
+
+                <div class="modal fade" id="FriendRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Friend request</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                    {% for r_request in active.full_rec_friend_requests %}
+                    
+                       <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 {{r_request.from_user.profile.slug}}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{r_request.from_user.profile.get_absolute_url}}">
+                                    <img width="50" height="50" src="{{r_request.from_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                </a>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{r_request.from_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{r_request.from_user.profile.user|truncatechars:18}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{r_request.from_user.profile.user|truncatechars:13}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{r_request.from_user.profile.user}}                                            
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+                                    </a>
+                                    <a href="{{r_request.from_user.profile.get_absolute_url}}">    
+                                        <small>
+                                            <p class="friendDes d-sm-none d-lg-block {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}">     {{r_request.from_user.profile.description|truncatechars:15}}
+                                            </p>
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}" >       {{r_request.from_user.profile.description|truncatechars:35}}
+                                            </p>
+                                        </small>
+                                    </a>
+                                </div>
+                                <small><a data-href='{{r_request.from_user.profile.api_accept_friend_url}}' class="btn btn-primary AcceptBtn fa fa-check" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.accept_friend_url}}" data-toggle="tooltip" data-placement="top" title="Accept"></a></small>
+
+                                <small><a data-href='{{r_request.from_user.profile.api_delete_friend_request_url}}' class="btn btn-secondary IgnoreBtn fa fa-times" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.delete_friend_request_url}}" data-toggle="tooltip" data-placement="top" title="Ignore"></a></small>
+                               
+                            </div>
+                      </div>  
+                {% endfor %}
+
+                            </div>
+
+                    </div>
+                    </div>
+                </div>
+                
+
+            {% endif %}
+
+
+
+
+            <!---------------------->
+
+                
+            <!--Connection-->
+
+                <br>
+                <div class="list-group-item mb-1 p-1 topFriends">
+                    <div class="mx-1">
+                       <h3 class="Center">Connection</h3>
+                    </div>
+                </div>
+            {% if active.friends_list %}
+                    {% for friend in active.friends_list %}
+                    
+                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{friend.user.profile.get_absolute_url}}">
+                                    <img id="p{{friend.user.profile.slug}}" width="50" height="50" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" class="profile rounded-circle friendImg ml-1">
+
+                                </a>
+                        <script type="text/javascript">
+                        var img_S{{ friend.user.profile.slug }} = document.getElementById("p{{ friend.user.profile.slug }}")
+                        var img_B{{ friend.user.profile.slug }} = document.createElement('img')
+                        img_B{{ friend.user.profile.slug }}.onload = function(){
+                            img_S{{ friend.user.profile.slug }}.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B{{ friend.user.profile.slug }}.src = '{{ friend.user.profile.image.url }}' 
+                        },50)  
+
+                          
+                        </script>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{friend.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{friend.user.profile.user|truncatechars:18}}
+
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{friend.user.profile.user|truncatechars:13}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+
+                                        </strong>
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{friend.user.profile.user}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{friend.user.profile.user|truncatechars:10}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+                                         
+                                    </a>
+                                    <a href="{{friend.user.profile.get_absolute_url}}">
+                                        <small>
+
+                                            <p class="friendDes d-sm-none d-lg-block {% if friend.user.profile.veryfied %}mt-1{% endif %}">     {{friend.user.profile.description|truncatechars:15}}
+                                            </p>
+
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if friend.user.profile.veryfied %}mt-1{% endif %}" >       {{friend.user.profile.description|truncatechars:35}}
+                                            </p>
+
+                                        </small>
+                                    </a>
+                                        
+                                   
+                                </div>
+                                {% if request.user == friend.user %}
+
+                                {% else %}
+                                    {% if request.user == active.u %}
+                                        <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
+                                            <i class="fa fa-comment"></i>
+                                        </a>
+
+                                        {% else %}
+
+                                        {% if friend.user.profile in request.user.profile.friends.all %}
+                                            <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
+                                                <i class="fa fa-comment"></i>
+                                            </a>
+                                        {% else %}
+
+                                            {% if friend.user.profile in request.user.profile.from_user.all %}
+                                                <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
+
+                                            {% elif friend.user.profile in request.user.profile.to_user.all %}
+                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
+
+                                            {% else %}
+                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
+
+
+
+                                            {% endif %}
+
+                                        {% endif %}
+         
+                                    {% endif %}
+
+                                {% endif %}
+                            </div>
+                      </div>
+
+
+                                                         
+                {% endfor %}
+
+
+                
+                    
+                <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" data-toggle="modal" data-target="#FriendModal">
+                    
+                    <div class="mx-1 ">
+                        <p class="lead Center">Show all</p>
+                    </div>
+                </a>
+
+                {% else %}
+                
+                <div class=" list-group-item mb-1 p-1 BottomFriends">
+                    <div class="mx-1 ">
+                        <p class="lead Center">No Connection.</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-------------------->
+                    
+              
+                {% if active.friends_list %}
+                <!-- Connection Modal -->
+
+                <div class="modal fade" id="FriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Connection</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                    {% for friend in active.full_friends_list %}
+                    
+                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{friend.user.profile.get_absolute_url}}">
+                                    <img width="50" height="50" src="{{friend.user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                </a>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{friend.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{friend.user.profile.user|truncatechars:18}}
+
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{friend.user.profile.user|truncatechars:13}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+
+                                        </strong>
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{friend.user.profile.user}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons ml-1" data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{friend.user.profile.user|truncatechars:10}}
+                                            {% if friend.user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+                                         
+                                    </a>
+                                    <a href="{{friend.user.profile.get_absolute_url}}">    
+                                        <small>
+
+                                            <p class="friendDes d-sm-none d-lg-block {% if friend.user.profile.veryfied %}mt-1{% endif %}">     {{friend.user.profile.description|truncatechars:15}}
+                                            </p>
+
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if friend.user.profile.veryfied %}mt-1{% endif %}" >       {{friend.user.profile.description|truncatechars:35}}
+                                            </p>
+
+                                        </small>
+                                    </a>  
+                                        
+                                   
+                                </div>
+                                {% if request.user == friend.user %}
+
+                                {% else %}
+                                    {% if request.user == active.u %}
+                                        <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
+                                            <i class="fa fa-comment"></i>
+                                        </a>
+
+                                        {% else %}
+
+                                        {% if friend.user.profile in request.user.profile.friends.all %}
+                                            <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
+                                                <i class="fa fa-comment"></i>
+                                            </a>
+                                        {% else %}
+
+                                            {% if friend.user.profile in request.user.profile.from_user.all %}
+                                                <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
+
+                                            {% elif friend.user.profile in request.user.profile.to_user.all %}
+                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
+
+                                            {% else %}
+
+                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
+
+                                            {% endif %}
+
+                                        {% endif %}
+         
+                                    {% endif %}
+
+                                {% endif %}
+                            </div>
+                      </div>
+
+
+                                                          
+                {% endfor %}
+
+                            </div>
+
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!------------------>
+
+                <!--sended friend request-->
+
+                {% if request.user == active.u %}
+                    {% if active.sent_friend_requests %}
+                        <br>
+                        <div class="list-group-item mb-1 p-1 topFriends">
+                            <div class="mx-1">
+                                <h3 class="Center">Friend request from you</h3>
+                            </div>
+                        </div>
+                    
+
+                {% for s_request in active.sent_friend_requests %}
+                    <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{s_request.to_user.profile.get_absolute_url}}">
+                                    <img width="50" height="50" src="{{s_request.to_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                </a>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{s_request.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+
+                                        <strong class="d-none d-xl-block">{{s_request.to_user.profile.user|truncatechars:18}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{s_request.to_user.profile.user|truncatechars:13}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{s_request.to_user.profile.user}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{s_request.to_user.profile.user|truncatechars:10}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                     </a>
+                                    <a href="{{s_request.to_user.profile.get_absolute_url}}">    
+                                        <small>
+                                            <p class="friendDes d-sm-none d-lg-block {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}">     {{s_request.to_user.profile.description|truncatechars:15}}
+                                            </p>
+
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}" >       {{s_request.to_user.profile.description|truncatechars:35}}
+                                            </p>
+                                        </small>
+                                    </a>
+                                </div>
+
+                                <a data-href='{{s_request.to_user.profile.api_sent_friend_request_url}}' href="{{s_request.to_user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{s_request.to_user.profile.slug}}" id="{{s_request.to_user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
+                               
+                            </div>
+                      </div>
+                    
+                {% endfor %}
+                <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends"
+                 data-toggle="modal" data-target="#SentFriendModal">
+                    <div class="mx-1">
+                        <p class="lead Center">Show all</p>
+                    </div>
+                </a>
+                <br>
+
+                {% endif %}
+                {% endif %}
+
+                <!----------------->
+            </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+            {% if active.full_sent_friend_requests %}
+                <!-- Friend request Modal -->
+
+                <div class="modal fade" id="SentFriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Friend request from you</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                    {% for s_request in active.full_sent_friend_requests %}
+                    
+                    <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{s_request.to_user.profile.get_absolute_url}}">
+                                    <img width="50" height="50" src="{{s_request.to_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                </a>
+                                <div class="flex-column  mx-1">
+                                    <a href="{{s_request.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+
+                                        <strong class="d-none d-xl-block">{{s_request.to_user.profile.user|truncatechars:18}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{s_request.to_user.profile.user|truncatechars:13}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{s_request.to_user.profile.user}}
+                                            {% if s_request.to_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
+                                            {% if r_request.from_user.profile.veryfied %}
+                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+                                        </strong>
+
+                                     </a>
+                                    <a href="{{s_request.to_user.profile.get_absolute_url}}">    
+                                        <small>
+                                            <p class="friendDes d-sm-none d-lg-block {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}">     {{s_request.to_user.profile.description|truncatechars:15}}
+                                            </p>
+
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}" >       {{s_request.to_user.profile.description|truncatechars:35}}
+                                            </p>
+                                        </small>
+                                    </a>
+                                </div>
+                                <a data-href='{{s_request.to_user.profile.api_sent_friend_request_url}}' href="{{s_request.to_user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{s_request.to_user.profile.slug}}" id="{{s_request.to_user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
+                               
+                            </div>
+                      </div>
+                {% endfor %}
+
+                            </div>
+
+                    </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+
+            
+
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block javascript %}
+
+{% if user.is_authenticated %}
+
+
+<script type="text/javascript">
+
+
+$(function(){
+
+$('.RequestBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var btn3 = $('.Fbtn')
+    var FriendRequestUrl = this_.attr("data-href")
+    $.ajax({
+        url: FriendRequestUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            if (data.sent){
+                updateBtn(this_)
+            }
+            else if(data.canceled){
+                updateBtn2(this_)
+            }
+            else if(data.rec_request){
+                updateBtn3(this_)
+
+            }
+            else if(data.friends){
+                updateBtn4(this_)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+$('.RequestBtn2').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var id = this_.attr('id')
+    var btnid = ('.'+id)
+    var btn2 = $(btnid)
+    var FriendRequestUrl = this_.attr("data-href")
+    $.ajax({
+        url: FriendRequestUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            if (data.sent){
+                updateBtn6(this_,btn2,id)
+            }
+            else if(data.canceled){
+                updateBtn7(this_,btn2,id)
+            }
+            else if(data.rec_request){
+                updateBtn9(this_,btn2)
+
+            }
+            else if(data.friends){
+                updateBtn8(this_,btn2)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+
+$('.DFriend').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+
+    var DeleteFriendUrl = this_.attr("data-href")
+    $.ajax({
+        url: DeleteFriendUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            if (data.deleted){
+                updateBtn5(this_)
+            }
+
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+
+function updateBtn(btn){
+    btn.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn ')
+    btn.attr('data-original-title','Cancel request')
+    btn.attr('title','Cancel request')
+
+}
+
+function updateBtn2(btn){
+    btn.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn ')
+    btn.attr('data-original-title','Add to connection')
+    btn.attr('title','Add to connection')
+    
+}
+function updateBtn3(btn){
+    btn.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
+    btn.hide()
+
+    
+}
+
+function updateBtn4(btn){
+    btn.after('<a href="" class="btn btn-info ConnectBtn fa fa-check DFriend " data-toggle="tooltip" data-placement="top" title="Connected"></a>')
+    btn.hide()
+
+
+    
+}
+
+function updateBtn5(btn){
+    btn.after('<a data-href="{{profile.api_sent_friend_request_url}}" href="{{profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn"  data-toggle="tooltip" data-placement="top" title="Add to connection"></a>')
+    btn.hide()
+
+
+    
+}
+
+function updateBtn6(btn,btn2,id){
+    btn.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2'+ id)
+    btn.attr('data-original-title','Cancel request')
+    btn.attr('title','Cancel request')
+    btn2.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 '+ id)
+    btn2.attr('data-original-title','Cancel request')
+    btn2.attr('title','Cancel request')
+}
+
+function updateBtn7(btn,btn2,id){
+    btn.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 '+ id)
+    btn.attr('data-original-title','Add to connection')
+    btn.attr('title','Add to connection')
+    btn2.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 '+ id)
+    btn2.attr('data-original-title','Add to connection')
+    btn2.attr('title','Add to connection')
+    
+}
+
+function updateBtn8(btn,btn2,id){
+    btn.after('<a href="#" class="btn btn-outline-info ConnectBtn mx-1 fa fa-comment" type="button"data-toggle="tooltip" data-placement="top" title="Chat"></a>')
+    btn.hide()
+    btn2.after('<a href="#" class="btn btn-outline-info ConnectBtn mx-1 fa fa-comment" type="button"data-toggle="tooltip" data-placement="top" title="Chat"></a>')
+    btn2.hide()
+}
+
+function updateBtn9(btn,btn2){
+    btn.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
+    btn.hide()
+    btn2.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
+    btn2.hide()
+
+    
+}
+
+$('.AcceptBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var id = this_.attr('id')
+    var btnid = ('.'+id)
+    var FRequest = $(btnid)
+    var FriendRequestUrl = this_.attr("data-href")
+    $.ajax({
+        url: FriendRequestUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            if (data.accepted){
+                updateBtn10(FRequest)
+            }
+
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+$('.IgnoreBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var id = this_.attr('id')
+    var btnid = ('.'+id)
+    var FRequest = $(btnid)
+    var FriendRequestUrl = this_.attr("data-href")
+    $.ajax({
+        url: FriendRequestUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            if (data.ignored){
+                updateBtn10(FRequest)
+            }
+
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+
+
+function updateBtn10(FR){
+    FR.hide()
+    
+}
+
+
+});    
+
+
+</script>
+
+
+{% endif %}
+{% endblock javascript %}
+

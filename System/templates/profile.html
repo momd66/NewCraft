@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% block content  %}
+
+{% block cssblock %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'profile/style.css' %}">
+
+{% endblock %}
+
+<div class="container portfolio ">
+	<div class="row ">
+		<div class="col-md-12">
+			<div class="heading">				
+				<img src="https://image.ibb.co/cbCMvA/logo.png" />
+			</div>
+		</div>	
+	</div>
+	<div class="bio-info card">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="bio-image d-none d-lg-block">
+							<a href="{{user.profile.get_absolute_url}}">
+								<img id="imgProfile1" width="280" height="280" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
+							</a>
+						</div>
+            <script type="text/javascript">
+                        var img_S1 = document.getElementById("imgProfile1")
+                        var img_B1 = document.createElement('img')
+                        img_B1.onload = function(){
+                            img_S1.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B1.src = '{{ user.profile.image.url }}' 
+                        },50)  
+
+                          
+            </script>
+						<div class="bio-image d-none d-md-block d-lg-none">
+							<a href="{{user.profile.get_absolute_url}}">
+								<img id="imgProfile2" width="250" height="250" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
+							</a>
+						</div>
+                        <script type="text/javascript">
+                        var img_S2 = document.getElementById("imgProfile2")
+                        var img_B2 = document.createElement('img')
+                        img_B2.onload = function(){
+                            img_S2.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B2.src = '{{ user.profile.image.url }}' 
+                        },50)  
+
+                          
+            </script>
+						<div class="bio-image d-md-none">
+							<a href="{{user.profile.get_absolute_url}}">
+								<img id="imgProfile3" width="190" height="190" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
+							</a>
+						</div>
+                        <script type="text/javascript">
+                        var img_S3 = document.getElementById("imgProfile3")
+                        var img_B3 = document.createElement('img')
+                        img_B3.onload = function(){
+                            img_S3.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B3.src = '{{ user.profile.image.url }}' 
+                        },50)  
+
+                          
+            </script>
+					</div>
+				</div>	
+			</div>
+			<article class="col-md-6 media-body">
+				<div class="bio-content profile-card-2" id="profileInfo">
+					<h1 class="ProfileName ProfileData article-title d-none d-md-block" name="UserName">{{ user.username}}</h1>
+					<h3 class="ProfileName ProfileData article-title d-md-none" name="UserName">{{ user.username }}</h3>
+					<h6 class="ProfileEmail ProfileData">{{ user.email }}</h6>
+					<div class="lead ProfileDescription ProfileData" name="Description">{{user.profile.description}}</div>
+					<hr>
+					<div style="text-align:center;" class="icon-block">
+
+						{% if user.profile.facebock %}
+							<a href="{{user.profile.facebock}}" target="_blank">
+								<i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="{{user.profile.facebock|truncatechars:25}}"></i>
+							</a>
+                       	{% endif %}
+
+                       	{% if user.profile.twitter %}
+                       		<a href="{{user.profile.twitter}}" target="_blank">
+                       			<i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="{{user.profile.twitter|truncatechars:25}}"></i>
+                       		</a>
+                       	{% endif %}
+
+                       	{% if user.profile.linkedin %}
+                       		<a href="{{user.profile.linkedin}}" target="_blank">
+                        		<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="{{user.profile.linkedin|truncatechars:25}}"></i>
+                       		</a>
+                      	{% endif %}
+
+                    	{% if user.profile.instagram %}
+                      		<a href="{{user.profile.instagram}}" target="_blank">
+                				<i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" title="{{user.profile.instagram|truncatechars:25}}"></i>
+                   			</a>
+               			{% endif %}
+
+                  		{% if user.profile.reddit %}
+                   			<a href="{{user.profile.reddit}}" target="_blank">
+                   				<i class="fa fa-reddit" data-toggle="tooltip" data-placement="top" title="{{user.profile.reddit|truncatechars:25}}"></i>
+                 			</a>
+                     	{% endif %}
+
+                     	{% if user.profile.snapchat %}
+                 			<a href="{{user.profile.snapchat}}" target="_blank">
+                     			<i class="fa fa-snapchat" data-toggle="tooltip" data-placement="top" title="{{user.profile.snapchat|truncatechars:25}}"></i>
+                   		</a>
+
+                     	{% endif %}
+
+                     	{% if user.profile.youtube %}
+    						<a href="{{user.profile.youtube}}" target="_blank">
+                        		<i class="fa fa-youtube-play" data-toggle="tooltip" data-placement="top" title="{{user.profile.youtube|truncatechars:25}}"></i>
+                      		</a>
+                   		{% endif %}
+
+                        {% if user.profile.email %}
+                          	<a href="mailto:{{user.profile.email}}">
+                              	<i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="{{user.profile.email|truncatechars:15}}"></i>
+	                       	</a>
+	               		{% endif %}
+                   	</div>
+					<a class="btn btn-outline-info btnsize my-2" onClick="editProfile('{{ user.username}}')" 
+					data-toggle="modal" data-target="#myModal">
+					Edit Profile</a>
+					<a class="btn btn-info btnsize my-2" href="{% url 'logout' %}">Logout</a>
+				</div>
+			</article>
+		</div>	
+	</div>
+</div>
+
+<!--Modal Profile-->
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        	<h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        		<span aria-hidden="true">x</span>
+        	</button>
+        </div>
+        <form id="updateProfile" action="">
+        	<div class="modal-body">
+        		<label>Image</label><br>
+        		<div class="bio-image p-img">
+        			<a href="{% url 'update-profile' %}">
+        				<img class="profile-img" width="130" height="130" src="{{ user.profile.image.url }}" alt="image" />
+        			</a>
+        		</div>
+        		<br>
+        		<hr>
+        		<a href="{% url 'update-profile' %}">
+        			<img class="b-img img-fluid d-none d-md-block" src="{{ user.profile.background_image.url }}" />
+        			<img class="b-img-s img-fluid d-block d-md-none" src="{{ user.profile.background_image.url }}" />
+        		</a>
+        		<label>Username</label>
+        		<input type="text" class="form-control" id="form-username" type="text"
+        		name="formUsername" maxlength="20" required>
+        		<label>Description</label>
+        		<textarea name="formDescription" id="form-description"
+        		class="form-control" rows="3" maxlength="250" required></textarea>
+        	</div>
+        	<div class="modal-footer">
+        		<button type="submit" class="btn btn-primary">Save changes</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+        	</div>
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block javascript %}
+
+<script type="text/javascript">
+
+
+function editProfile(username){
+	if (username) {
+		usernameTxet = $('h1.ProfileName').text();
+		descriptionText = $('div.ProfileDescription').text();
+		$('#form-username').val(usernameTxet);
+		$('#form-description').val(descriptionText);
+	}
+}
+
+$('form#updateProfile').submit(function(){
+	//var idInput = $('input[name="formId"]').val().trim();
+	var UsernameInput    = $('input[name="formUsername"]').val().trim();
+	var descriptionInput = $('textarea[name="formDescription"]').val().trim();
+
+
+	if(UsernameInput){
+
+		$.ajax({
+			url:"{% url 'profile-update' %}",
+			data:{
+				'username2':UsernameInput,
+				'description2':descriptionInput
+
+			
+
+			},
+			dataType:'json',
+			success:function(data){
+				if (data.profile) {
+					updateProfile(data.profile)
+				}
+			},
+			error:function(){
+				countUsername = (UsernameInput.length);
+
+				if (countUsername >= 21){
+					alert("The username max length is 20 letters!")
+				}
+				else{
+					alert("This username is taken or is unusable!")
+				}
+			}
+
+		})
+
+	}
+	else {
+		alert("All fields most have a value.");
+
+	}
+	$('form#updateProfile').trigger("reset");
+	$('#close').click()
+    return false;
+
+
+
+});
+
+
+
+function updateProfile(profile){
+	$('#profileInfo').children('.ProfileData').each(function(){
+		var attr = $(this).attr("name");
+		if (attr == 'UserName'){
+			$(this).text(profile.username);
+		}else if (attr == 'Description'){
+			$(this).text(profile.description);
+		}
+		
+	})
+}
+
+
+
+
+</script>
+
+
+{% endblock javascript %}
+
+
+
+
+
+
+
+
+

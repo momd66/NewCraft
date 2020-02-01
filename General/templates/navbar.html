@@ -1,0 +1,175 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'navbar/style.css' %}">
+
+<nav class="navbar navbar-expand-md bg-info navbar-dark my_nav">
+	<a class="navbar-brand d-none d-md-block" href="{% url 'home' %}">AeDeSe</a>
+
+	<!--navbar toggler-->
+
+	<button class="navbar-toggler mb-1 mt-1" type="button" data-toggle="collapse" data-target="#myNavbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<!------------->
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+    	<ul class="navbar-nav">
+
+    		<!--Home link-->
+
+    		<li class="nav-item d-none d-md-block">
+    			<a class="nav-link {{active.ActiveHome}}" href="{% url 'home' %}">Home</a>
+    		</li>
+
+    		<!------------->
+
+    		
+    		<!--Post link-->
+
+		{% if user.is_authenticated %}
+
+			<li class="nav-item"><a class="nav-link {{active.ActivePost}}" href="#">Post</a></li>
+
+		{% endif %}
+
+
+		    <!------------->
+
+
+		</ul>
+
+		<div class="col-md-6 searchform d-none {{active.HomeBlockMd}}">
+			<form class="navbar-form" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+					<div class="input-group-btn">
+						<button class="btn btn-outline-info searchButton" type="submit">
+							<i class="material-icons" data-toggle="tooltip" data-placement="top" title="Search">search</i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+	
+
+	<div class="collapse navbar-collapse justify-content-end" id="myNavbar">
+		<ul class="navbar-nav">
+
+		{% if user.is_authenticated %}
+
+        
+			<!--profile img-->
+		<div class="ProfileImg">
+
+			<a href="{% url 'profile' %}" data-toggle="tooltip" data-placement="top" title="Profile"> 
+				<img class="rounded-circle account-img nav-item d-none d-md-block ml-2 profile_img {{NoneProfile}} {{active.ActiveProfile}} {{ActiveProfile}}" 
+				width="55" height="55" id="NavImg" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png">
+			</a>
+
+
+		</div>
+			<script type="text/javascript">
+				var b_img_S11 = document.getElementById("NavImg")
+				var b_img_Bnav11 = document.createElement('img')
+				b_img_Bnav11.onload = function(){
+					b_img_S11.src = this.src
+				}
+				setTimeout(function(){
+					b_img_Bnav11.src = '{{ user.profile.image.url }}'
+				},50)
+
+			</script>
+
+			<!------------->
+      
+			<!--Login and Register link-->
+
+		{% else %}
+
+			<li class="nav-item"><a class="nav-link mb-1 {{ActiveLogin}}" href="{% url 'login' %}">LogIn</a></li>
+			<li class="nav-item "><a class="nav-link {{ActiveRegister}}" href="{% url 'register' %}">Register</a></li>
+
+		{% endif %}
+
+		    <!---------------------------->
+
+		</ul>
+	</div>
+
+	<div class="HomeLink d-block d-md-none">
+    	<a class="HomeLinkStyle {{active.ActiveHome}}" href="{% url 'home' %}"><i class="material-icons">home</i></a>
+	</div>
+
+
+	<div class="col-6 searchformSmall d-none d-md-none {{active.HomeBlock}}">
+		<form class="navbar-form" role="search">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+				<div class="input-group-btn">
+					<button class="btn btn-outline-info searchButton" type="submit"><i class="material-icons">search</i></button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+<!--samll screen size profile img-->
+
+{% if user.is_authenticated %}
+
+
+
+
+
+<div class="ProfileImg">
+
+<a class="d-md-none small_img_position mt-1" href="{% url 'profile' %}" 
+	data-toggle="tooltip" data-placement="top" title="Profile">
+	<img id="NavImg2" class="rounded-circle account-img profile_img {{NoneProfile}} {{active.ActiveProfile}}" 
+	width="52" height="52" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" >
+</a>
+
+</div>
+			<script type="text/javascript">
+				var b_img_S22 = document.getElementById("NavImg2")
+				var b_img_Bnav22 = document.createElement('img')
+				b_img_Bnav22.onload = function(){
+					b_img_S22.src = this.src
+				}
+				b_img_Bnav22.src = '{{ user.profile.image.url }}'
+				
+
+			</script>
+{% else %}
+
+<p class="d-none d-md-block spacenav"></p>
+
+{% endif %}
+
+
+
+<!-------------------------------->
+
+
+
+	
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

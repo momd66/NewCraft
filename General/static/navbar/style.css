@@ -1,0 +1,93 @@
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+
+.searchform{
+	position: absolute;
+	width: 40%;
+	top:8px;
+	left:30px;
+
+}
+.searchformSmall{
+	position: absolute !important;
+	top:15px;
+	left:140px;
+}
+
+.searchButton{
+	color:white !important;
+	height: 38px;
+}
+
+.HomeLink{
+	position: fixed;
+	left:85px;
+	top:24px;
+
+}
+
+
+
+.HomeLinkStyle{
+	color:rgba(255,255,255,.5);
+
+}
+
+.active{
+	color:#fff !important;
+}
+
+.HomeLinkStyle:hover{
+
+	color:rgba(255,255,255,.5);
+	text-decoration-line: none;
+}
+
+
+	
+
+.my_nav{
+	width: 100%;
+	position: fixed !important;
+	top:0;
+	z-index: 900;
+
+	}
+
+
+
+.profile_img{
+	object-fit: cover;
+	border: solid rgba(255,255,255,.5) 3px;
+
+}
+
+.small_img_position{
+	position: fixed !important;
+	top:5px;
+	z-index: 1000;
+	right:10px;
+	}
+
+
+
+
+
+.profile_img:hover{
+	border: solid rgba(190,255,255) 3px;
+	}
+
+	
+.profile_img:active{
+	border: solid white 2px;
+	}
+
+.activeimg{
+	border: solid white 2px !important;
+
+
+	}
+
+.spacenav{
+	height: 37px;
+}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content  %}
+{% load crispy_forms_tags %}
+{% if messages %}
+   {% for message in messages %}    
+       <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+   {% endfor %}
+{% endif %}
+
+<style type="text/css">
+
+
+#hint_id_username{
+display: none !important;
+}
+
+
+</style>
+
+<form  method="POST" enctype="multipart/form-data">{% csrf_token %}
+	<fieldset class="form-group">
+		<legend class="border-bottom mb-4">Image</legend>
+		<div class="">
+			{{p_form|crispy}}
+		</div>
+	</fieldset>
+	<div class="form-group">
+		<button class="btn btn-outline-info" type="submit">Save</button>
+	</div>
+	
+</form>
+
+
+
+
+
+{% endblock %}
