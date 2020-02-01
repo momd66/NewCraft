@@ -151,11 +151,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL  = '/media/'
 
-#AKIATSCZXTZPWAUITHFL
-#UnuXGCML3H5HXO+Zcy9tOF92h8XqmMv9uzfRqaae
-
-#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
