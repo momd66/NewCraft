@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('General.urls')),
     path('', include('System.urls')),
+    path('', include('Post.urls')),
+    path('', include('Comment.urls')),
 ]

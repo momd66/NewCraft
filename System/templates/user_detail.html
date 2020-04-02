@@ -10,6 +10,7 @@
 
 {% block content  %}
 <style type="text/css">
+
 .blur{
 filter: blur(2px);
 transition: all 1s;
@@ -18,19 +19,78 @@ transition: all 1s;
 .noblur{
     transition: all 2s;
 }
+#b_img_S1{
+    height: 300!important;
+}
+#b_img_S2{
+    height: 300!important;
+}
 </style>
+
+<style type="text/css">
+
+
+.h7 {
+    font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+    margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+        .gedf-main {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+        .gedf-card {
+            margin-bottom: 2.77rem;
+        }
+}
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+    content: none;
+    display: none;
+}
+
+.profile-card-22 .profile {
+    border-radius: 50%;
+    max-width: 100px;
+    max-height: 100px;
+    border: 3px solid rgba(255, 255, 255, 1);
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px #b0b3b7;
+}
+
+.IconBtn{
+    font-size: 20px;
+}
+
+  .contop{
+    padding-bottom: 0px;
+}
+</style>
+
+
 <!-- User Profile -->
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7" class="user-profile">
-                <div class="card profile-card-2">
-                    <div class="card-img-block d-md-none ">
-                        <img class="img-fluid blur" id="b_img_S1" width="1200" height="300" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2Fblue0517.jpg%3Fitok%3DV3825voJ&w=400&c=sc&poi=face&q=85" alt="Card image cap" />
-                    </div>
-                    <div class="card-img-block d-none d-md-block">
-                        <img class="img-fluid b-img blur" id="b_img_S2" width="1200" height="300" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.travelandleisure.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F1600x1000%2Fpublic%2Fblue0517.jpg%3Fitok%3DV3825voJ&w=400&c=sc&poi=face&q=85" alt="Card image cap" />
-                    </div>
+
+<div class="row">
+{% if active.post_list.count == 0 %}
+    <div class=" section background-white col-lg-7">
+{% else %}
+    <div class=" section background-white col-lg-7" >
+{% endif %}
+    <div class="" class="user-profile">
+        <div class="card profile-card-2">
+            <div class="card-img-block d-md-none ">
+                <img class="img-fluid blur" id="b_img_S1" width="1200" height="300" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" alt="Card image cap" />
+            </div>
+            <div class="card-img-block d-none d-md-block">
+                <img class="img-fluid b-img blur" id="b_img_S2" width="1200" height="300" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" alt="Card image cap" />
+            </div>
                     <script type="text/javascript">
                         var b_img_S1 = document.getElementById("b_img_S1")
                         var b_img_S2 = document.getElementById("b_img_S2")
@@ -41,6 +101,7 @@ transition: all 1s;
                             b_img_S1.className = "img-fluid noblur";
                             b_img_S2.src = this.src
                             b_img_S2.className = "img-fluid b-img noblur";
+
                         }
                         setTimeout(function(){
                            b_img_B.src = '{{ profile.background_image.url }}' ;
@@ -48,29 +109,32 @@ transition: all 1s;
                        },50)
 
                     </script>
-                    <div class="card-body pt-5">
-                        {% if object.user == user %}
-
-                            <a href="{% url 'profile' %}">
-                                <img width="90" height="90" id="imgProfile" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="profile-image" class="profile"/>
-                            </a>
-
-                            <a href="{% url 'profile' %}"class="userlinkname">
-                                <h5 class="card-title ml-1">{{profile.user}}
-                                    {% if profile.veryfied %}
-                                        <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
-                                    {% endif %}
-
-                                </h5>
-                            </a>
-
-                        {% else %}
-
-                            <img id="imgProfile" width="90" height="90" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="profile-image" class="profile"/>
-                            <h5 class="card-title ml-1">{{profile.user}}
+                <div class="card-body pt-5">
+                    {% if object.user == user %}
+                        <a href="{% url 'profile' %}">
+                            <img width="90" height="90" id="imgProfile" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="profile-image" class="profile"/>
+                        </a>
+                        <a href="{% url 'profile' %}"class="userlinkname">
+                            <h5 class="card-title ml-1">{{profile.user.first_name}}
                                 {% if profile.veryfied %}
                                     <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
                                 {% endif %}
+                                <p class="text-muted h7">{{profile.user.username}} | {{profile.followers.count}} followers</p>
+
+                            </h5>
+                        </a>
+                    {% else %}
+                        <img id="imgProfile" width="90" height="90" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="profile-image" class="profile"/>
+                            <h5 class="card-title ml-1">
+                                {{profile.user.first_name}}
+                                {% if profile.veryfied %}
+                                    <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                {% endif %}
+                                <p class="text-muted h7 ">{{profile.user.username}} | {{profile.followers.count}} followers
+                                    {% if user.profile in profile.following.all %}
+                                       |<n class='bg-light'> Follows You</n> 
+                                    {% endif %} 
+                                </p>
                             </h5>
 
                         {% endif %}
@@ -83,55 +147,36 @@ transition: all 1s;
                         setTimeout(function(){
                            img_B.src = '{{ profile.image.url }}' 
                         },50)  
-
-                          
                     </script>
-
                         {% if user.is_authenticated %}
+                        <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 
                             {% if profile.user == user %}
-
-                                    
+                               
                             {% else %}
-                                {% if active.button_status == 'not_friend' %}
-                                    <a data-href='{{profile.api_sent_friend_request_url}}' href="{{profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn"  data-toggle="tooltip" data-placement="top" title="Add to connection"></a> 
-                                    
-                                  
-
-
-                                {% elif active.button_status == 'rec_request' %}
-                                    <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
-
-
-                                {% elif active.button_status == 'friend_request_sent' %}
-                                    <a data-href='{{profile.api_sent_friend_request_url}}' href="{{profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
-
-                                    
-
-
-
-                                {% elif active.button_status == 'friends' %}
-                                    <a data-href='{{profile.api_delete_friend_url}}' href="{{profile.delete_friend_url}}" class="btn btn-info ConnectBtn fa fa-check DFriend" data-toggle="tooltip" data-placement="top" title="Connected"></a>
-
-
+                                {% if user.profile in profile.followers.all %}
+                                    <a data-href='{{profile.api_follow_url}}' style="font-family: 'Varela Round', sans-serif;" href="{{profile.get_absolute_url}}"  class="btn btn-light ConnectBtn FollowBtn" ><b class=""></b> FOLLOWING</a> 
+                                {% else %}
+                                    <a data-href='{{profile.api_follow_url}}' style="font-family: 'Varela Round', sans-serif;" href="{{profile.get_absolute_url}}" class="btn btn-outline-info ConnectBtn FollowBtn" ><b class=""></b> FOLLOW
+                                    </a>
                                 {% endif %}
-                                
-                                    
+
+                                                                    
                             {% endif %}
 
                         {% else %}
-                                <a href="{% url 'login' %}" type="button" class="btn btn-outline-info ConnectBtn fa fa-user-plus" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
-
+                                <a  style="font-family: 'Varela Round', sans-serif;" href="{% url 'login' %}" class="btn btn-outline-info ConnectBtn FollowBtn" ><b class=""></b> FOLLOW
+                                    </a>
                         {% endif %}
-
                         <p class="fa fa-calendar "></p>
                         <p class="{% if profile.veryfied %} dateJoined2 {% else %} dateJoined {% endif %} card-text"> Joined {{profile.user.date_joined|date:"M d Y"}}</p>
 
                         {% if profile.description == '' %}
-                            <p class="space"></p>
+                        <hr>
 
                         {% else %}
                         <p class="card-text">{{profile.description}}</p>
+                        <hr>
 
                         {% endif %}
 
@@ -196,354 +241,189 @@ transition: all 1s;
                     </div>
                 </div>
             </div>
-            <!----------------------------->
+        </div>
+<!----------------------------->
 
 
-            <div class="col-lg-5">
-
-            <!-- Friend requests -->
-
-            {% if request.user == active.u %}
 
 
-                {% if active.rec_friend_requests %}
-                <br>
-                <div class="list-group-item mb-1 p-1 topFriends">
-                    <div class="mx-1">
-                       <h3 class="Center">Friend request</h3>
-                    </div>
+
+<div class="col-lg-5" >
+
+    <!-- FOLLOWING -->
+
+            
+
+        {% if active.following_list %}
+            <br>
+            <div class="list-group-item mb-1 p-1 topFriends">
+                <div class="mx-1">
+                    <h3 class="Center">FOLLOWING ({{active.following_all.count}})</h3>
                 </div>
-                
-                {% for r_request in active.rec_friend_requests %}
-                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 {{r_request.from_user.profile.slug}}">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{r_request.from_user.profile.get_absolute_url}}">
-                                    <img width="50" height="50" src="{{r_request.from_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
-                                </a>
-                                <div class="flex-column  mx-1">
-                                    <a href="{{r_request.from_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
-                                        <strong class="d-none d-xl-block">{{r_request.from_user.profile.user|truncatechars:18}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
+            </div>
+            {% for follower in active.following_list %}
+               <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1" >
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{follower.to_user.profile.get_absolute_url}}">
+                            <img id="px{{follower.to_user.profile.slug}}" width="50" height="50" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" class="profile rounded-circle friendImg ml-1">
 
-                                            {% endif %}
-                                        </strong>
+                        </a>
+                    <script type="text/javascript">
+                        var img_Sx{{ follower.to_user.profile.slug }} = document.getElementById("px{{follower.to_user.profile.slug }}")
+                        var img_Bx{{ follower.to_user.profile.slug }} = document.createElement('img')
+                        img_Bx{{ follower.to_user.profile.slug }}.onload = function(){
+                            img_Sx{{ follower.to_user.profile.slug }}.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_Bx{{ follower.to_user.profile.slug }}.src = '{{ follower.to_user.profile.image.url }}' 
+                        },50)  
 
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{r_request.from_user.profile.user|truncatechars:13}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
+                          
+                    </script>
+                        <div class="flex-column  mx-1">
+                            <a href="{{follower.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                <strong class="d-none d-xl-block">{{follower.to_user.first_name|truncatechars:18}}
 
-                                            {% endif %}
-                                        </strong>
+                                    {% if follower.to_user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
 
-                                        <strong class="d-none d-sm-block d-lg-none">{{r_request.from_user.profile.user}}                                            
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
+                                    {% endif %}
+                                </strong>
 
-                                            {% endif %}
-                                        </strong>
+                                <strong class="d-none d-sm-none d-lg-block d-xl-none">{{follower.to_user.first_name|truncatechars:13}}
+                                    {% if follower.to_user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
 
-                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
+                                    {% endif %}
 
-                                            {% endif %}
-                                        </strong>
-                                    </a>
-                                    <a href="{{r_request.from_user.profile.get_absolute_url}}">   
-                                        <small>
-                                            <p class="friendDes d-sm-none d-lg-block {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}">     {{r_request.from_user.profile.description|truncatechars:15}}
-                                            </p>
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}" >       {{r_request.from_user.profile.description|truncatechars:35}}
-                                            </p>
-                                        </small>
-                                    </a>
-                                </div>
-                                <small><a data-href='{{r_request.from_user.profile.api_accept_friend_url}}' class="btn btn-primary AcceptBtn fa fa-check" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.accept_friend_url}}" data-toggle="tooltip" data-placement="top" title="Accept"></a></small>
+                                </strong>
 
-                                <small><a data-href='{{r_request.from_user.profile.api_delete_friend_request_url}}' class="btn btn-secondary IgnoreBtn fa fa-times" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.delete_friend_request_url}}" data-toggle="tooltip" data-placement="top" title="Ignore"></a></small>
-                               
-                            </div>
-                      </div>
+                                <strong class="d-none d-sm-block d-lg-none">{{follower.to_user.first_name}}
+                                    {% if follower.to_user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
 
-              {% endfor %}
+                                    {% endif %}
+                                </strong>
 
-                    <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" 
-                        data-toggle="modal" data-target="#FriendRequestModal">
-                        <div class="mx-1 ">
-                            <p class="lead Center">Show all</p>
+                                <strong class="d-block d-sm-none">{{follower.to_user.first_name|truncatechars:10}}
+                                    {% if follower.to_user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+
+                                    {% endif %}
+                                </strong>
+                                         
+                            </a>
+                            <a href="{{follower.to_user.profile.get_absolute_url}}">
+                                <small>
+                                    <p class="friendDes d-sm-none d-lg-block {% if follower.to_user.profile.veryfied %}mt-1{% endif %}">
+                                        {{follower.to_user.username|truncatechars:20}}
+                                        {% if user.profile in follower.to_user.profile.following.all %}
+                                         | <n class='bg-light'> Follows You</n> 
+                                        {% endif %} 
+                                    </p>
+
+                                    <p class="friendDes d-none d-sm-block d-lg-none {% if follower.to_user.profile.veryfied %}mt-1{% endif %}" >
+                                        {{follower.to_user.username|truncatechars:35}}
+                                        {% if user.profile in follower.to_user.profile.following.all %}
+                                         | <n class='bg-light'> Follows You</n> 
+                                        {% endif %}
+                                    </p>
+
+                                </small>
+                            </a>
+                                         
                         </div>
-                    </a>
-            {% endif %}
+                    {% if user.is_authenticated %}
+                        {% if request.user == follower.to_user %}
 
+                            {% else %}
+                                {% if follower.to_user.profile in user.profile.following.all %}
+                                    <a data-href='{{follower.to_user.profile.api_follow_url}}' id="{{follower.to_user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.to_user.profile.api_follow_url}}" class="btn btn-light ConnectBtn FollowBtn2 {{follower.to_user.profile.slug}}" ><b class=""></b> FOLLOWING</a> 
+                                {% else %}
+                                    <a data-href='{{follower.to_user.profile.api_follow_url}}' id="{{follower.to_user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.to_user.profile.api_follow_url}}" class="btn btn-outline-info ConnectBtn FollowBtn2 {{follower.to_user.profile.slug}}" ><b class=""></b> FOLLOW</a>
 
+                                {% endif %}
+         
+                                
+                        {% endif %}
 
+                    {% else %}
+                        <a  style="font-family: 'Varela Round', sans-serif;" href="{% url 'login' %}" class="btn btn-outline-info ConnectBtn" ><b class=""></b> FOLLOW</a>
+                    {% endif %}
+                    </div>
+                </div>                                         
 
-                <!-- Friend request Modal -->
+            {% endfor %}
+        {% endif %}
+        {% if active.following_list %}
+            <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" data-toggle="modal" data-target="#FollowingModal">
+                <div class="mx-1">
+                    <p class="lead Center">Show more</p>
+                </div>
+            </a>
+        {% else %}
+        <br class="d-none d-lg-block">
+            <div class="d-none d-lg-block list-group-item mb-1 p-1 topFriends">
+                <div class="mx-1">
+                    <h3 class="Center">FOLLOWING ({{active.following_all.count}})</h3>
+                </div>
+            </div>
+            <div class="d-none d-lg-block list-group-item mb-1 p-1 BottomFriends">
+                <div class="mx-1 ">
+                    <p class="lead Center">No Following.</p>
+                </div>
+            </div>
 
-                <div class="modal fade" id="FriendRequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        {% endif %}
+            
+
+        {% if active.following_list %}
+
+            <!-- Following Modal -->
+
+                <div class="modal fade" id="FollowingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Friend request</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+                            <h4 class="modal-title" id="myModalLabel">Following ({{active.following_all.count}})</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                            <div class="modal-body">
-                    {% for r_request in active.full_rec_friend_requests %}
-                    
-                       <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 {{r_request.from_user.profile.slug}}">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{r_request.from_user.profile.get_absolute_url}}">
-                                    <img width="50" height="50" src="{{r_request.from_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
-                                </a>
-                                <div class="flex-column  mx-1">
-                                    <a href="{{r_request.from_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
-                                        <strong class="d-none d-xl-block">{{r_request.from_user.profile.user|truncatechars:18}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{r_request.from_user.profile.user|truncatechars:13}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-none d-sm-block d-lg-none">{{r_request.from_user.profile.user}}                                            
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-                                    </a>
-                                    <a href="{{r_request.from_user.profile.get_absolute_url}}">    
-                                        <small>
-                                            <p class="friendDes d-sm-none d-lg-block {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}">     {{r_request.from_user.profile.description|truncatechars:15}}
-                                            </p>
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if r_request.from_user.profile.veryfied %}mt-1{% endif %}" >       {{r_request.from_user.profile.description|truncatechars:35}}
-                                            </p>
-                                        </small>
-                                    </a>
-                                </div>
-                                <small><a data-href='{{r_request.from_user.profile.api_accept_friend_url}}' class="btn btn-primary AcceptBtn fa fa-check" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.accept_friend_url}}" data-toggle="tooltip" data-placement="top" title="Accept"></a></small>
-
-                                <small><a data-href='{{r_request.from_user.profile.api_delete_friend_request_url}}' class="btn btn-secondary IgnoreBtn fa fa-times" id="{{r_request.from_user.profile.slug}}" href="{{r_request.from_user.profile.delete_friend_request_url}}" data-toggle="tooltip" data-placement="top" title="Ignore"></a></small>
-                               
-                            </div>
-                      </div>  
-                {% endfor %}
-
-                            </div>
-
-                    </div>
-                    </div>
-                </div>
-                
-
-            {% endif %}
-
-
-
-
-            <!---------------------->
-
-                
-            <!--Connection-->
-
-                <br>
-                <div class="list-group-item mb-1 p-1 topFriends">
-                    <div class="mx-1">
-                       <h3 class="Center">Connection</h3>
-                    </div>
-                </div>
-            {% if active.friends_list %}
-                    {% for friend in active.friends_list %}
+                        <div class="modal-body">
+                    {% for follower in active.following_10 %}
                     
                         <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{friend.user.profile.get_absolute_url}}">
-                                    <img id="p{{friend.user.profile.slug}}" width="50" height="50" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" class="profile rounded-circle friendImg ml-1">
+                                <a href="{{follower.to_user.profile.get_absolute_url}}">
+                                    <img id="cs{{follower.to_user.profile.slug}}" width="50" height="50" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" class="profile rounded-circle friendImg ml-1">
 
                                 </a>
                         <script type="text/javascript">
-                        var img_S{{ friend.user.profile.slug }} = document.getElementById("p{{ friend.user.profile.slug }}")
-                        var img_B{{ friend.user.profile.slug }} = document.createElement('img')
-                        img_B{{ friend.user.profile.slug }}.onload = function(){
-                            img_S{{ friend.user.profile.slug }}.src = this.src
+                        var img_S2z{{ follower.to_user.profile.slug }} = document.getElementById("cs{{ follower.to_user.profile.slug }}")
+                        var img_B2z{{ follower.to_user.profile.slug }} = document.createElement('img')
+                        img_B2z{{ follower.to_user.profile.slug }}.onload = function(){
+                            img_S2z{{ follower.to_user.profile.slug }}.src = this.src
                         }
                         setTimeout(function(){
-                           img_B{{ friend.user.profile.slug }}.src = '{{ friend.user.profile.image.url }}' 
+                           img_B2z{{ follower.to_user.profile.slug }}.src = '{{ follower.to_user.profile.image.url }}' 
                         },50)  
 
                           
                         </script>
                                 <div class="flex-column  mx-1">
-                                    <a href="{{friend.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
-                                        <strong class="d-none d-xl-block">{{friend.user.profile.user|truncatechars:18}}
+                                    <a href="{{follower.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{follower.to_user.first_name|truncatechars:18}}
 
-                                            {% if friend.user.profile.veryfied %}
+                                            {% if follower.to_user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
                                             {% endif %}
                                         </strong>
 
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{friend.user.profile.user|truncatechars:13}}
-                                            {% if friend.user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-
-                                        </strong>
-
-                                        <strong class="d-none d-sm-block d-lg-none">{{friend.user.profile.user}}
-                                            {% if friend.user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-block d-sm-none">{{friend.user.profile.user|truncatechars:10}}
-                                            {% if friend.user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-                                         
-                                    </a>
-                                    <a href="{{friend.user.profile.get_absolute_url}}">
-                                        <small>
-
-                                            <p class="friendDes d-sm-none d-lg-block {% if friend.user.profile.veryfied %}mt-1{% endif %}">     {{friend.user.profile.description|truncatechars:15}}
-                                            </p>
-
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if friend.user.profile.veryfied %}mt-1{% endif %}" >       {{friend.user.profile.description|truncatechars:35}}
-                                            </p>
-
-                                        </small>
-                                    </a>
-                                        
-                                   
-                                </div>
-                                {% if request.user == friend.user %}
-
-                                {% else %}
-                                    {% if request.user == active.u %}
-                                        <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
-                                            <i class="fa fa-comment"></i>
-                                        </a>
-
-                                        {% else %}
-
-                                        {% if friend.user.profile in request.user.profile.friends.all %}
-                                            <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
-                                                <i class="fa fa-comment"></i>
-                                            </a>
-                                        {% else %}
-
-                                            {% if friend.user.profile in request.user.profile.from_user.all %}
-                                                <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
-
-                                            {% elif friend.user.profile in request.user.profile.to_user.all %}
-                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
-
-                                            {% else %}
-                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
-
-
-
-                                            {% endif %}
-
-                                        {% endif %}
-         
-                                    {% endif %}
-
-                                {% endif %}
-                            </div>
-                      </div>
-
-
-                                                         
-                {% endfor %}
-
-
-                
-                    
-                <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" data-toggle="modal" data-target="#FriendModal">
-                    
-                    <div class="mx-1 ">
-                        <p class="lead Center">Show all</p>
-                    </div>
-                </a>
-
-                {% else %}
-                
-                <div class=" list-group-item mb-1 p-1 BottomFriends">
-                    <div class="mx-1 ">
-                        <p class="lead Center">No Connection.</p>
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-------------------->
-                    
-              
-                {% if active.friends_list %}
-                <!-- Connection Modal -->
-
-                <div class="modal fade" id="FriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Connection</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                        </div>
-                            <div class="modal-body">
-                    {% for friend in active.full_friends_list %}
-                    
-                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{friend.user.profile.get_absolute_url}}">
-                                    <img width="50" height="50" src="{{friend.user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
-                                </a>
-                                <div class="flex-column  mx-1">
-                                    <a href="{{friend.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
-                                        <strong class="d-none d-xl-block">{{friend.user.profile.user|truncatechars:18}}
-
-                                            {% if friend.user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{friend.user.profile.user|truncatechars:13}}
-                                            {% if friend.user.profile.veryfied %}
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{follower.to_user.first_name|truncatechars:13}}
+                                            {% if follower.to_user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
@@ -551,16 +431,16 @@ transition: all 1s;
 
                                         </strong>
 
-                                        <strong class="d-none d-sm-block d-lg-none">{{friend.user.profile.user}}
-                                            {% if friend.user.profile.veryfied %}
+                                        <strong class="d-none d-sm-block d-lg-none">{{follower.to_user.first_name}}
+                                            {% if follower.to_user.profile.veryfied %}
                                                 <li class="material-icons ml-1" data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
                                             {% endif %}
                                         </strong>
 
-                                        <strong class="d-block d-sm-none">{{friend.user.profile.user|truncatechars:10}}
-                                            {% if friend.user.profile.veryfied %}
+                                        <strong class="d-block d-sm-none">{{follower.to_user.first_name|truncatechars:10}}
+                                            {% if follower.to_user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
@@ -568,13 +448,19 @@ transition: all 1s;
                                         </strong>
                                          
                                     </a>
-                                    <a href="{{friend.user.profile.get_absolute_url}}">    
+                                    <a href="{{follower.to_user.profile.get_absolute_url}}">    
                                         <small>
 
-                                            <p class="friendDes d-sm-none d-lg-block {% if friend.user.profile.veryfied %}mt-1{% endif %}">     {{friend.user.profile.description|truncatechars:15}}
+                                            <p class="friendDes d-sm-none d-lg-block {% if follower.to_user.profile.veryfied %}mt-1{% endif %}">     {{follower.to_user.username|truncatechars:15}}
+                                                {% if user.profile in follower.to_user.profile.following.all %}
+                                                 | <n class='bg-light'> Follows You</n> 
+                                                {% endif %}     
                                             </p>
 
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if friend.user.profile.veryfied %}mt-1{% endif %}" >       {{friend.user.profile.description|truncatechars:35}}
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if follower.to_user.profile.veryfied %}mt-1{% endif %}" >       {{follower.to_user.username|truncatechars:35}}
+                                                {% if user.profile in follower.to_user.profile.following.all %}
+                                                 | <n class='bg-light'> Follows You</n> 
+                                                {% endif %} 
                                             </p>
 
                                         </small>
@@ -582,228 +468,636 @@ transition: all 1s;
                                         
                                    
                                 </div>
-                                {% if request.user == friend.user %}
+                    {% if user.is_authenticated %}
+                        {% if request.user == follower.to_user %}
 
+                            {% else %}
+                                {% if follower.to_user.profile in user.profile.following.all %}
+                                    <a data-href='{{follower.to_user.profile.api_follow_url}}' id="{{follower.to_user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.to_user.profile.api_follow_url}}" class="btn btn-light ConnectBtn FollowBtn2 {{follower.to_user.profile.slug}}" ><b class=""></b> FOLLOWING</a> 
                                 {% else %}
-                                    {% if request.user == active.u %}
-                                        <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
-                                            <i class="fa fa-comment"></i>
-                                        </a>
-
-                                        {% else %}
-
-                                        {% if friend.user.profile in request.user.profile.friends.all %}
-                                            <a href="#" class="btn btn-outline-info FriendBtn mx-1" type="button" data-toggle="tooltip" data-placement="top" title="Chat">
-                                                <i class="fa fa-comment"></i>
-                                            </a>
-                                        {% else %}
-
-                                            {% if friend.user.profile in request.user.profile.from_user.all %}
-                                                <a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question" data-toggle="tooltip" data-placement="top" title="A request for you"></a>
-
-                                            {% elif friend.user.profile in request.user.profile.to_user.all %}
-                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
-
-                                            {% else %}
-
-                                                <a data-href='{{friend.user.profile.api_sent_friend_request_url}}' href="{{friend.user.profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 {{friend.user.profile.slug}}" id="{{friend.user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Add to connection"></a>
-
-                                            {% endif %}
-
-                                        {% endif %}
-         
-                                    {% endif %}
+                                    <a data-href='{{follower.to_user.profile.api_follow_url}}' id="{{follower.to_user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.to_user.profile.api_follow_url}}" class="btn btn-outline-info ConnectBtn FollowBtn2 {{follower.to_user.profile.slug}}" ><b class=""></b> FOLLOW</a>
 
                                 {% endif %}
+         
+                                
+                        {% endif %}
+
+                    {% else %}
+                        <a  style="font-family: 'Varela Round', sans-serif;" href="{% url 'login' %}" class="btn btn-outline-info ConnectBtn" ><b class=""></b> FOLLOW</a>
+                    {% endif %}
                             </div>
                       </div>
 
 
                                                           
                 {% endfor %}
+                {% if active.following_more_10 %}
+                <h5 style="text-align: center;">And others...</h5>
+                {% endif %}
 
                             </div>
 
                     </div>
                     </div>
                 </div>
-                {% endif %}
+
+
+            {% endif %}
 
                 <!------------------>
 
-                <!--sended friend request-->
-
-                {% if request.user == active.u %}
-                    {% if active.sent_friend_requests %}
-                        <br>
-                        <div class="list-group-item mb-1 p-1 topFriends">
-                            <div class="mx-1">
-                                <h3 class="Center">Friend request from you</h3>
-                            </div>
-                        </div>
-                    
-
-                {% for s_request in active.sent_friend_requests %}
-                    <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{s_request.to_user.profile.get_absolute_url}}">
-                                    <img width="50" height="50" src="{{s_request.to_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
-                                </a>
-                                <div class="flex-column  mx-1">
-                                    <a href="{{s_request.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
-
-                                        <strong class="d-none d-xl-block">{{s_request.to_user.profile.user|truncatechars:18}}
-                                            {% if s_request.to_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{s_request.to_user.profile.user|truncatechars:13}}
-                                            {% if s_request.to_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
 
 
-                                        <strong class="d-none d-sm-block d-lg-none">{{s_request.to_user.profile.user}}
-                                            {% if s_request.to_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                        <strong class="d-block d-sm-none">{{s_request.to_user.profile.user|truncatechars:10}}
-                                            {% if s_request.to_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                     </a>
-                                    <a href="{{s_request.to_user.profile.get_absolute_url}}">    
-                                        <small>
-                                            <p class="friendDes d-sm-none d-lg-block {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}">     {{s_request.to_user.profile.description|truncatechars:15}}
-                                            </p>
-
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}" >       {{s_request.to_user.profile.description|truncatechars:35}}
-                                            </p>
-                                        </small>
-                                    </a>
-                                </div>
-
-                                <a data-href='{{s_request.to_user.profile.api_sent_friend_request_url}}' href="{{s_request.to_user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{s_request.to_user.profile.slug}}" id="{{s_request.to_user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
-                               
-                            </div>
-                      </div>
-                    
-                {% endfor %}
-                <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends"
-                 data-toggle="modal" data-target="#SentFriendModal">
-                    <div class="mx-1">
-                        <p class="lead Center">Show all</p>
-                    </div>
-                </a>
-                <br>
-
-                {% endif %}
-                {% endif %}
-
-                <!----------------->
-            </div>
-                
-            </div>
-        </div>
     </div>
+    
+    
 
 </div>
-            {% if active.full_sent_friend_requests %}
-                <!-- Friend request Modal -->
 
-                <div class="modal fade" id="SentFriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="row">
+<div class="col-lg-7 gedf-main">
+    <br class="d-lg-block">
+    {% for post in active.post_list_3 %}
+        {% if post.draft and post.author != user %}
+
+        {% else %}
+            <div class="card gedf-card" id="idpost{{post.slug}}">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="profile-card-22 ml-3">
+                                <a>
+                                    <img  id="p{{post.id}}" class="rounded-circle profile " width="45" height="45" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="">
+                                </a>
+                        <script type="text/javascript">
+                            var img_S{{ post.id }}{{ post.slug }} = document.getElementById("p{{ post.id }}")
+                            var img_B{{ post.id }}{{ post.slug }} = document.createElement('img')
+                            img_B{{ post.id }}{{ post.slug }}.onload = function(){
+                                img_S{{ post.id }}{{ post.slug }}.src = this.src
+                            }
+                            setTimeout(function(){
+                               img_B{{ post.id }}{{ post.slug }}.src = '{{ profile.image.url }}' 
+                            },50)  
+                                    
+                        </script>
+                            </div>
+                            <div>
+                                <a class="card-title userlinkname">
+                                    <div class="h5 m-0 ">
+                                        {{post.author.first_name}}
+                                        {% if profile.veryfied %}
+                                            <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="h7 text-muted">{{post.author.profile.user.username|truncatechars:30}}</div>
+                            </div>
+                                
+                        </div>
+                        <div>
+                            {% if request.user.is_authenticated %}
+                            {% if request.user == post.author %}
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    
+                                        <a class="dropdown-item" href="{{post.post_edit_url}}">Edit</a>
+                                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#confirm-delete{{post.slug}}">Delete</a>
+                                        
+                                
+                                    
+
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a class="text-dark userlinkname" href="{{post.get_absolute_url_2}}">
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i> {{post.date_posted|timesince}} ago 
+                        {% if post.draft %}
+                            <b class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="private"></b>
+                        {% endif %}
+                    </div>
+                    
+                        <p id="content{{post.id}}" class="card-text">
+                            {{post.content}}
+                        </p>
+                        {% if post.links %}
+                    
+                    <script type="text/javascript">
+                        $("#content{{post.id}}").each(function() {
+                        var text = $(this).html()
+                        //alert("1- "+text)
+                        {% for link in post.links_all %}
+                        var link2 = '{{link}}'.replace(" ","");
+                        var link3 = '{{link|truncatechars:30}}'.replace(" ","");
+                        //text = text.replace('{{link}}',"<a href='{{link}}'>{{link}}</a>");
+                        text = text.replace('{{link}}'," <a class='userlinkname' target='_blank' href='"+link2+"'>"+link3+"</a> ");
+
+                        {% endfor %}
+                        //alert("2- "+text)
+                        $(this).html(text);
+                        });
+
+                    </script>
+                    
+
+                    {% endif %}
+
+                        {% if post.image %}
+
+                            <img class="card-img profile blur" height="300px" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" id="i{{post.id}}">
+                            <script type="text/javascript">
+                                var img_S2{{ post.id }}{{ post.slug }} = document.getElementById("i{{ post.id }}")
+                                var img_B2{{ post.id }}{{ post.slug }} = document.createElement('img')
+                                img_B2{{ post.id }}{{ post.slug }}.onload = function(){
+                                    img_S2{{ post.id }}{{ post.slug }}.src = this.src
+                                    img_S2{{ post.id }}{{ post.slug }}.className = "card-img profile noblur";
+
+                            
+                                }
+                                setTimeout(function(){
+                                img_B2{{ post.id }}{{ post.slug }}.src = '{{post.image.url}}' 
+                                },50)  
+
+                          
+                            </script>
+                        {% endif %}
+                    
+                
+
+                    
+                </div></a>
+                <div class="card-footer">
+                    {% if request.user.is_authenticated %}
+
+                        {% if request.user.profile in post.likes.all %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-primary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        {% else %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-secondary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        {% endif %}
+
+                    {% else %}
+                        <a  href="{% url 'login' %}"  class="card-link text-secondary  IconBtn "><i class="fa fa-heart "></i> <b>{{post.likes.count}}</b></a>
+
+                    {% endif %}
+                        <n class="card-link text-secondary IconBtn"><i class="fa fa-comment"></i><b> {{post.comments_all.count}}</b></n>
+
+                        <a  id="c{{post.id}}" href="" link='http://localhost:8000{{post.get_absolute_url_2}}'  class="card-link text-secondary IconBtn ShareBtn"><i class="fa fa-share-alt"></i></a>
+                </div>
+            </div>
+            {% if request.user == post.author %}
+                <div class="modal fade" id="confirm-delete{{post.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Delete Post</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Are you sure you want to <b>delete</b> this post?</h5>
+                            </div>
+                            <div class="modal-footer">                   
+                                <a id="post{{post.slug}}" class="btn btn-danger btn-ok PostDelete " href="{{user.profile.get_absolute_url}}" data-href='{{post.delete_post_api_url}}'> 
+                                    Yes, Delete <b> </b>
+                                </a>
+                                <button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                <br class="d-block d-lg-none">
+        {% endif %}
+                
+    {% endfor %}
+
+
+</div>
+
+
+<!--FOLLOWERS-->
+<div class="col-lg-5" >
+<br>
+<div class="list-group-item mb-1 p-1 topFriends">
+    <div class="mx-1">
+        <h3 class="Center">FOLLOWERS ({{active.followers_all.count}})</h3>
+    </div>
+</div>
+    {% if active.followers_list %}
+        {% for follower in active.followers_list %}
+                <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1" >
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{{follower.user.profile.get_absolute_url}}">
+                            <img id="p{{follower.user.profile.slug}}" width="50" height="50" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" class="profile rounded-circle friendImg ml-1">
+
+                        </a>
+                    <script type="text/javascript">
+                        var img_S{{ follower.user.profile.slug }} = document.getElementById("p{{follower.user.profile.slug }}")
+                        var img_B{{ follower.user.profile.slug }} = document.createElement('img')
+                        img_B{{ follower.user.profile.slug }}.onload = function(){
+                            img_S{{ follower.user.profile.slug }}.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B{{ follower.user.profile.slug }}.src = '{{ follower.user.profile.image.url }}' 
+                        },50)  
+
+                          
+                    </script>
+                        <div class="flex-column  mx-1">
+                            <a href="{{follower.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                <strong class="d-none d-xl-block">{{follower.user.first_name|truncatechars:18}}
+
+                                    {% if follower.user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+
+                                    {% endif %}
+                                </strong>
+
+                                <strong class="d-none d-sm-none d-lg-block d-xl-none">{{follower.user.first_name|truncatechars:13}}
+                                    {% if follower.user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+
+                                    {% endif %}
+
+                                </strong>
+
+                                <strong class="d-none d-sm-block d-lg-none">{{follower.user.first_name}}
+                                    {% if follower.user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+
+                                    {% endif %}
+                                </strong>
+
+                                <strong class="d-block d-sm-none">{{follower.user.first_name|truncatechars:10}}
+                                    {% if follower.user.profile.veryfied %}
+                                        <li class="material-icons " data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+
+                                    {% endif %}
+                                </strong>
+                                         
+                            </a>
+                            <a href="{{follower.user.profile.get_absolute_url}}">
+                                <small>
+                                    <p class="friendDes d-sm-none d-lg-block {% if follower.user.profile.veryfied %}mt-1{% endif %}">
+                                        {{follower.user.username|truncatechars:15}}
+                                            {% if user.profile in follower.user.profile.following.all %}
+                                             | <n class='bg-light'> Follows You</n> 
+                                            {% endif %} 
+                                    </p>
+
+                                    <p class="friendDes d-none d-sm-block d-lg-none {% if follower.user.profile.veryfied %}mt-1{% endif %}" >
+                                        {{follower.user.username|truncatechars:35}}
+                                            {% if user.profile in follower.user.profile.following.all %}
+                                            | <n class='bg-light'> Follows You</n> 
+                                            {% endif %} 
+                                    </p>
+
+                                </small>
+                            </a>
+                                         
+                        </div>
+                    {% if user.is_authenticated %}
+                        {% if request.user == follower.user %}
+
+                            {% else %}
+                                {% if follower.user.profile in user.profile.following.all %}
+                                    <a data-href='{{follower.user.profile.api_follow_url}}' id="{{follower.user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.user.profile.api_follow_url}}" class="btn btn-light ConnectBtn FollowBtn2 {{follower.user.profile.slug}}" ><b class=""></b> FOLLOWING</a> 
+                                {% else %}
+                                    <a data-href='{{follower.user.profile.api_follow_url}}' id="{{follower.user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.user.profile.api_follow_url}}" class="btn btn-outline-info ConnectBtn FollowBtn2 {{follower.user.profile.slug}}" ><b class=""></b> FOLLOW</a>
+
+                                {% endif %}
+         
+                                
+                        {% endif %}
+
+                    {% else %}
+                        <a  style="font-family: 'Varela Round', sans-serif;" href="{% url 'login' %}" class="btn btn-outline-info ConnectBtn" ><b class=""></b> FOLLOW</a>
+                    {% endif %}
+                    </div>
+                </div>                                         
+            {% endfor %}
+            <a class="ShowMoreBtn list-group-item list-group-item-action mb-1 p-1 BottomFriends" data-toggle="modal" data-target="#FriendModal">
+                <div class="mx-1 ">
+                    <p class="lead Center">Show more</p>
+                </div>
+            </a>
+
+        {% else %}
+                
+            <div class=" list-group-item mb-1 p-1 BottomFriends">
+                <div class="mx-1 ">
+                    <p class="lead Center">No Followers.</p>
+                </div>
+            </div>
+        {% endif %}
+
+
+            <!-------------------->
+                    
+        {% if active.followers_list %}
+            <!-- Followers Modal -->
+
+                <div class="modal fade" id="FriendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Friend request from you</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close ">
+                            <h4 class="modal-title" id="myModalLabel">Followers ({{active.followers_all.count}})</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                            <div class="modal-body">
-                    {% for s_request in active.full_sent_friend_requests %}
+                        <div class="modal-body">
+                    {% for follower in active.followers_10 %}
                     
-                    <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
+                        <div class="list-group-item list-group-item-action align-items-start  mb-1 p-1 ">
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{s_request.to_user.profile.get_absolute_url}}">
-                                    <img width="50" height="50" src="{{s_request.to_user.profile.image.url}}" class="profile rounded-circle friendImg ml-1">
+                                <a href="{{follower.user.profile.get_absolute_url}}">
+                                    <img id="c{{follower.user.profile.slug}}" width="50" height="50" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" class="profile rounded-circle friendImg ml-1">
+
                                 </a>
+                        <script type="text/javascript">
+                        var img_S2{{ follower.user.profile.slug }} = document.getElementById("c{{ follower.user.profile.slug }}")
+                        var img_B2{{ follower.user.profile.slug }} = document.createElement('img')
+                        img_B2{{ follower.user.profile.slug }}.onload = function(){
+                            img_S2{{ follower.user.profile.slug }}.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B2{{ follower.user.profile.slug }}.src = '{{ follower.user.profile.image.url }}' 
+                        },50)  
+
+                          
+                        </script>
                                 <div class="flex-column  mx-1">
-                                    <a href="{{s_request.to_user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                    <a href="{{follower.user.profile.get_absolute_url}}" class="text-dark userlinkname friendName">
+                                        <strong class="d-none d-xl-block">{{follower.user.profile.user.first_name|truncatechars:18}}
 
-                                        <strong class="d-none d-xl-block">{{s_request.to_user.profile.user|truncatechars:18}}
-                                            {% if s_request.to_user.profile.veryfied %}
+                                            {% if follower.user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
                                             {% endif %}
                                         </strong>
 
-                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{s_request.to_user.profile.user|truncatechars:13}}
-                                            {% if s_request.to_user.profile.veryfied %}
+                                        <strong class="d-none d-sm-none d-lg-block d-xl-none">{{follower.user.profile.user.first_name|truncatechars:13}}
+                                            {% if follower.user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
+                                                title="Trusted" style="color:#007bff;">done_all</li>
+
+                                            {% endif %}
+
+                                        </strong>
+
+                                        <strong class="d-none d-sm-block d-lg-none">{{follower.user.profile.user.first_name}}
+                                            {% if follower.user.profile.veryfied %}
+                                                <li class="material-icons ml-1" data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
                                             {% endif %}
                                         </strong>
 
-
-                                        <strong class="d-none d-sm-block d-lg-none">{{s_request.to_user.profile.user}}
-                                            {% if s_request.to_user.profile.veryfied %}
+                                        <strong class="d-block d-sm-none">{{follower.user.profile.user.first_name|truncatechars:10}}
+                                            {% if follower.user.profile.veryfied %}
                                                 <li class="material-icons " data-toggle="tooltip" data-placement="top"
                                                 title="Trusted" style="color:#007bff;">done_all</li>
 
                                             {% endif %}
                                         </strong>
-
-                                        <strong class="d-block d-sm-none">{{r_request.from_user.profile.user|truncatechars:10}}
-                                            {% if r_request.from_user.profile.veryfied %}
-                                                <li class="material-icons " data-toggle="tooltip" data-placement="top"
-                                                title="Trusted" style="color:#007bff;">done_all</li>
-
-                                            {% endif %}
-                                        </strong>
-
-                                     </a>
-                                    <a href="{{s_request.to_user.profile.get_absolute_url}}">    
-                                        <small>
-                                            <p class="friendDes d-sm-none d-lg-block {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}">     {{s_request.to_user.profile.description|truncatechars:15}}
-                                            </p>
-
-                                            <p class="friendDes d-none d-sm-block d-lg-none {% if s_request.to_user.profile.veryfied %}mt-1{% endif %}" >       {{s_request.to_user.profile.description|truncatechars:35}}
-                                            </p>
-                                        </small>
+                                         
                                     </a>
+                                    <a href="{{follower.user.profile.get_absolute_url}}">    
+                                        <small>
+
+                                            <p class="friendDes d-sm-none d-lg-block {% if follower.user.profile.veryfied %}mt-1{% endif %}">     {{follower.user.profile.user.username|truncatechars:15}}
+                                            {% if user.profile in follower.user.profile.following.all %}
+                                            | <n class='bg-light'> Follows You</n> 
+                                            {% endif %} 
+                                            </p>
+
+                                            <p class="friendDes d-none d-sm-block d-lg-none {% if follower.user.profile.veryfied %}mt-1{% endif %}" >       {{follower.user.profile.user.username|truncatechars:35}}
+                                            {% if user.profile in follower.user.profile.following.all %}
+                                            | <n class='bg-light'> Follows You</n> 
+                                            {% endif %} 
+                                            </p>
+
+                                        </small>
+                                    </a>  
+                                        
+                                   
                                 </div>
-                                <a data-href='{{s_request.to_user.profile.api_sent_friend_request_url}}' href="{{s_request.to_user.profile.sent_friend_request_url}}" class="btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 {{s_request.to_user.profile.slug}}" id="{{s_request.to_user.profile.slug}}" data-toggle="tooltip" data-placement="top" title="Cancel request"></a>
-                               
+                    {% if user.is_authenticated %}
+                        {% if request.user == follower.user %}
+
+                            {% else %}
+                                {% if follower.user.profile in user.profile.following.all %}
+                                    <a data-href='{{follower.user.profile.api_follow_url}}' id="{{follower.user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.user.profile.api_follow_url}}" class="btn btn-light ConnectBtn FollowBtn2 {{follower.user.profile.slug}}" ><b class=""></b> FOLLOWING</a> 
+                                {% else %}
+                                    <a data-href='{{follower.user.profile.api_follow_url}}' id="{{follower.user.profile.slug}}" style="font-family: 'Varela Round', sans-serif;" href="{{follower.user.profile.api_follow_url}}" class="btn btn-outline-info ConnectBtn FollowBtn2 {{follower.user.profile.slug}}" ><b class=""></b> FOLLOW</a>
+
+                                {% endif %}
+         
+                                
+                        {% endif %}
+
+                    {% else %}
+                        <a  style="font-family: 'Varela Round', sans-serif;" href="{% url 'login' %}" class="btn btn-outline-info ConnectBtn" ><b class=""></b> FOLLOW</a>
+                    {% endif %}
                             </div>
                       </div>
+
+
+                                                          
                 {% endfor %}
+                {% if active.followers_more_10 %}
+                <h5 style="text-align: center;">And others...</h5>
+                {% endif %}
 
                             </div>
 
                     </div>
                     </div>
                 </div>
-                {% endif %}
+            {% endif %}
+
+                <!------------------>
+
+</div>
+
+<div class="col-lg-7 gedf-main">
+    <br class="d-lg-block">
+    {% for post in active.post_list %}
+        {% if post.draft and post.author != user %}
+
+        {% else %}
+            <div class="card gedf-card PostData" pk="{{post.id}}" id="idpost{{post.slug}}">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="profile-card-22 ml-3">
+                                <a>
+                                    <img  id="p{{post.id}}" class="rounded-circle profile " width="45" height="45" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="">
+                                </a>
+                                <script type="text/javascript">
+                                    var img_S{{ post.id }}{{ post.slug }} = document.getElementById("p{{ post.id }}")
+                                    var img_B{{ post.id }}{{ post.slug }} = document.createElement('img')
+                                    img_B{{ post.id }}{{ post.slug }}.onload = function(){
+                                        img_S{{ post.id }}{{ post.slug }}.src = this.src
+                                    }
+                                    setTimeout(function(){
+                                       img_B{{ post.id }}{{ post.slug }}.src = '{{ profile.image.url }}' 
+                                    },50)  
+                                    
+                                </script>
+                            </div>
+                            <div>
+                                <a class="card-title userlinkname">
+                                    <div class="h5 m-0 ">
+                                        {{post.author.first_name}}
+                                        {% if profile.veryfied %}
+                                            <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="h7 text-muted">{{post.author.profile.user.username|truncatechars:30}}</div>
+                            </div>
+                                
+                        </div>
+                        <div>
+                            {% if request.user.is_authenticated %}
+                            {% if request.user == post.author %}
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    
+                                        <a class="dropdown-item" href="{{post.post_edit_url}}">Edit</a>
+                                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#confirm-delete{{post.slug}}">Delete</a>
+                                        
+                                    
+                                        
+                                    
+
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a class="text-dark userlinkname" href="{{post.get_absolute_url_2}}">
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i> {{post.date_posted|timesince}} ago 
+                        {% if post.draft %}
+                            <b class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="private"></b>
+                        {% endif %}
+                    </div>
+                    
+                        <p id="content{{post.id}}" class="card-text">
+                            {{post.content}}
+                        </p>
+                        {% if post.links %}
+                    
+                    <script type="text/javascript">
+                        $("#content{{post.id}}").each(function() {
+                        var text = $(this).html()
+                        //alert("1- "+text)
+                        {% for link in post.links_all %}
+                        var link2 = '{{link}}'.replace(" ","");
+                        var link3 = '{{link|truncatechars:30}}'.replace(" ","");
+                        //text = text.replace('{{link}}',"<a href='{{link}}'>{{link}}</a>");
+                        text = text.replace('{{link}}'," <a class='userlinkname' target='_blank' href='"+link2+"'>"+link3+"</a> ");
+
+                        {% endfor %}
+                        //alert("2- "+text)
+                        $(this).html(text);
+                        });
+
+                    </script>
+                    
+
+                    {% endif %}
+
+                        {% if post.image %}
+
+                            <img class="card-img profile blur" height="300px" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" id="iff{{post.id}}">
+                            <script type="text/javascript">
+                                var img_S2{{ post.id }}{{ post.slug }} = document.getElementById("iff{{ post.id }}")
+                                var img_B2{{ post.id }}{{ post.slug }} = document.createElement('img')
+                                img_B2{{ post.id }}{{ post.slug }}.onload = function(){
+                                    img_S2{{ post.id }}{{ post.slug }}.src = this.src
+                                    img_S2{{ post.id }}{{ post.slug }}.className = "card-img profile noblur";
+
+                            
+                                }
+                                setTimeout(function(){
+                                img_B2{{ post.id }}{{ post.slug }}.src = '{{post.image.url}}' 
+                                },50)  
+
+                          
+                            </script>
+                        {% endif %}
+                    
                 
 
-            
+                    
+                </div></a>
+                <div class="card-footer">
+                    {% if request.user.is_authenticated %}
+
+                        {% if request.user.profile in post.likes.all %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-primary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        {% else %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-secondary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        {% endif %}
+
+                    {% else %}
+                        <a  href="{% url 'login' %}"  class="card-link text-secondary  IconBtn "><i class="fa fa-heart "></i> <b>{{post.likes.count}}</b></a>
+
+                    {% endif %}
+                        <n class="card-link text-secondary IconBtn"><i class="fa fa-comment"></i><b> {{post.comments_all.count}}</b></n>
+
+                        <a  id="c{{post.id}}" href="" link='http://localhost:8000{{post.get_absolute_url_2}}'  class="card-link text-secondary IconBtn ShareBtn"><i class="fa fa-share-alt"></i></a>
+                </div>
+            </div>
+            {% if request.user == post.author %}
+                <div class="modal fade" id="confirm-delete{{post.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Delete Post</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Are you sure you want to <b>delete</b> this post?</h5>
+                            </div>
+                            <div class="modal-footer">                   
+                                <a id="post{{post.slug}}" class="btn btn-danger btn-ok PostDelete " href="{{user.profile.get_absolute_url}}" data-href='{{post.delete_post_api_url}}'> 
+                                    Yes, Delete <b> </b>
+                                </a>
+                                <button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                <br class="d-block d-lg-none">
+        {% endif %}
+                
+    {% endfor %}
+
+{% if active.post_list %}  
+<div style="text-align: center;" class="loadingIcon"><h1 class=""></h1></div>
+
+{% endif %}
+</div>
+
+</div>
+
+         
 
 
 
@@ -815,39 +1109,47 @@ transition: all 1s;
 
 
 {% block javascript %}
+                    
+                    
+                    <script type="text/javascript">
+                    $("#ss").each(function() {
+                        var text = $(this).text();
+                        text = text.replace("cat","<h1>cat</h1>");
+                        $(this).html(text);
+                    });
 
+                    </script>
 {% if user.is_authenticated %}
 
 
 <script type="text/javascript">
 
 
+
+
 $(function(){
 
-$('.RequestBtn').click(function(e){
+
+$('.FollowBtn').click(function(e){
     e.preventDefault()
     var this_ = $(this)
-    var btn3 = $('.Fbtn')
-    var FriendRequestUrl = this_.attr("data-href")
+    this_.attr('class','btn btn-outline-info ConnectBtn FollowBtn')
+    this_.children().attr('class','fa fa-cog fa-spin')
+    var loading = this_.children()
+    var FollowUrl = this_.attr("data-href")
     $.ajax({
-        url: FriendRequestUrl,
+        url: FollowUrl,
         method: 'GET',
         data: {},
         success: function (data) {
             console.log(data)
-            if (data.sent){
-                updateBtn(this_)
+            if (data.followed){
+                updateBtn(this_,loading)
             }
-            else if(data.canceled){
-                updateBtn2(this_)
+            else {
+                updateBtn2(this_,loading)
             }
-            else if(data.rec_request){
-                updateBtn3(this_)
 
-            }
-            else if(data.friends){
-                updateBtn4(this_)
-            }
         },
         error: function (error) {
             console.log(error)
@@ -858,32 +1160,31 @@ $('.RequestBtn').click(function(e){
     })
 });
 
-$('.RequestBtn2').click(function(e){
+
+$('.FollowBtn2').click(function(e){
     e.preventDefault()
     var this_ = $(this)
     var id = this_.attr('id')
     var btnid = ('.'+id)
     var btn2 = $(btnid)
-    var FriendRequestUrl = this_.attr("data-href")
+    this_.attr('class','btn btn-outline-info ConnectBtn FollowBtn2')
+    btn2.attr('class','btn btn-outline-info ConnectBtn FollowBtn2')
+    btn2.children().attr('class','fa fa-cog fa-spin')
+    var loading = btn2.children()
+    var FollowUrl = this_.attr("data-href")
     $.ajax({
-        url: FriendRequestUrl,
+        url: FollowUrl,
         method: 'GET',
         data: {},
         success: function (data) {
             console.log(data)
-            if (data.sent){
-                updateBtn6(this_,btn2,id)
+            if (data.followed){
+                updateBtn3(this_,btn2,id,loading)
             }
-            else if(data.canceled){
-                updateBtn7(this_,btn2,id)
+            else {
+                updateBtn4(this_,btn2,id,loading)
             }
-            else if(data.rec_request){
-                updateBtn9(this_,btn2)
 
-            }
-            else if(data.friends){
-                updateBtn8(this_,btn2)
-            }
         },
         error: function (error) {
             console.log(error)
@@ -895,21 +1196,74 @@ $('.RequestBtn2').click(function(e){
 });
 
 
-$('.DFriend').click(function(e){
+
+
+
+function updateBtn(btn,loading){
+    btn.attr('class','btn btn-light ConnectBtn  FollowBtn ')
+    loading.attr('class','')
+    btn.html('<b class=""></b> FOLLOWING')
+
+}
+
+function updateBtn2(btn,loading){
+    btn.attr('class','btn btn-outline-info ConnectBtn FolllowBtn ')
+    loading.attr('class','')
+    btn.html('<b class=""></b> FOLLOW')
+    
+}
+
+
+
+
+function updateBtn3(btn,btn2,id,loading){
+    btn.attr('class','btn btn-light ConnectBtn FollowBtn2'+ id)
+    btn2.attr('class','btn btn-light ConnectBtn FollowBtn2 '+ id)
+    btn.html('<b class=""></b> FOLLOWING')
+    btn2.html('<b class=""></b> FOLLOWING')
+    
+}
+
+function updateBtn4(btn,btn2,id,loading){
+    btn.attr('class','btn btn-outline-info ConnectBtn FollowBtn2 '+ id)
+    btn2.attr('class','btn btn-outline-info ConnectBtn FollowBtn2 '+ id)
+    btn.html('<b class=""></b> FOLLOW')
+    btn2.html('<b class=""></b> FOLLOW')
+    
+}
+
+
+
+$('.LikeBtn').click(function(e){
     e.preventDefault()
     var this_ = $(this)
 
-    var DeleteFriendUrl = this_.attr("data-href")
+    var LikeUrl = this_.attr("data-href")
+    var id = this_.attr("id")
     $.ajax({
-        url: DeleteFriendUrl,
+        url: LikeUrl,
         method: 'GET',
         data: {},
         success: function (data) {
             console.log(data)
-            if (data.deleted){
-                updateBtn5(this_)
-            }
 
+            if (data.like){
+
+                this_.attr('class','card-link text-primary LikeBtn IconBtn')
+                var likesOld = $('.LikeCount'+id).attr('num')
+                var likes = parseInt(likesOld)+1
+                $('.LikeCount'+id).attr('num',likes)
+                $('.LikeCount'+id).text(likes)
+                
+                
+            }
+            else{
+                this_.attr('class','card-link text-secondary LikeBtn IconBtn')
+                var likesOld2 = $('.LikeCount'+id).attr('num')
+                var likes2 = parseInt(likesOld2)-1
+                $('.LikeCount'+id).attr('num',likes2)
+                $('.LikeCount'+id).text(likes2)
+            }
         },
         error: function (error) {
             console.log(error)
@@ -920,146 +1274,322 @@ $('.DFriend').click(function(e){
     })
 });
 
-
-function updateBtn(btn){
-    btn.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn ')
-    btn.attr('data-original-title','Cancel request')
-    btn.attr('title','Cancel request')
-
-}
-
-function updateBtn2(btn){
-    btn.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn ')
-    btn.attr('data-original-title','Add to connection')
-    btn.attr('title','Add to connection')
-    
-}
-function updateBtn3(btn){
-    btn.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
-    btn.hide()
-
-    
-}
-
-function updateBtn4(btn){
-    btn.after('<a href="" class="btn btn-info ConnectBtn fa fa-check DFriend " data-toggle="tooltip" data-placement="top" title="Connected"></a>')
-    btn.hide()
-
-
-    
-}
-
-function updateBtn5(btn){
-    btn.after('<a data-href="{{profile.api_sent_friend_request_url}}" href="{{profile.sent_friend_request_url}}" class="btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn"  data-toggle="tooltip" data-placement="top" title="Add to connection"></a>')
-    btn.hide()
-
-
-    
-}
-
-function updateBtn6(btn,btn2,id){
-    btn.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2'+ id)
-    btn.attr('data-original-title','Cancel request')
-    btn.attr('title','Cancel request')
-    btn2.attr('class','btn btn-secondary ConnectBtn fa fa-user-times RequestBtn2 '+ id)
-    btn2.attr('data-original-title','Cancel request')
-    btn2.attr('title','Cancel request')
-}
-
-function updateBtn7(btn,btn2,id){
-    btn.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 '+ id)
-    btn.attr('data-original-title','Add to connection')
-    btn.attr('title','Add to connection')
-    btn2.attr('class','btn btn-outline-info ConnectBtn fa fa-user-plus RequestBtn2 '+ id)
-    btn2.attr('data-original-title','Add to connection')
-    btn2.attr('title','Add to connection')
-    
-}
-
-function updateBtn8(btn,btn2,id){
-    btn.after('<a href="#" class="btn btn-outline-info ConnectBtn mx-1 fa fa-comment" type="button"data-toggle="tooltip" data-placement="top" title="Chat"></a>')
-    btn.hide()
-    btn2.after('<a href="#" class="btn btn-outline-info ConnectBtn mx-1 fa fa-comment" type="button"data-toggle="tooltip" data-placement="top" title="Chat"></a>')
-    btn2.hide()
-}
-
-function updateBtn9(btn,btn2){
-    btn.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
-    btn.hide()
-    btn2.after('<a href="{% url 'user-detail' user.profile.slug %}" class="btn btn-outline-primary ConnectBtn fa fa-question " data-toggle="tooltip" data-placement="top" title="A request for you"></a>')
-    btn2.hide()
-
-    
-}
-
-$('.AcceptBtn').click(function(e){
-    e.preventDefault()
-    var this_ = $(this)
-    var id = this_.attr('id')
-    var btnid = ('.'+id)
-    var FRequest = $(btnid)
-    var FriendRequestUrl = this_.attr("data-href")
-    $.ajax({
-        url: FriendRequestUrl,
-        method: 'GET',
-        data: {},
-        success: function (data) {
-            console.log(data)
-            if (data.accepted){
-                updateBtn10(FRequest)
-            }
-
-        },
-        error: function (error) {
-            console.log(error)
-
-        }
-
-
-    })
-});
-
-$('.IgnoreBtn').click(function(e){
-    e.preventDefault()
-    var this_ = $(this)
-    var id = this_.attr('id')
-    var btnid = ('.'+id)
-    var FRequest = $(btnid)
-    var FriendRequestUrl = this_.attr("data-href")
-    $.ajax({
-        url: FriendRequestUrl,
-        method: 'GET',
-        data: {},
-        success: function (data) {
-            console.log(data)
-            if (data.ignored){
-                updateBtn10(FRequest)
-            }
-
-        },
-        error: function (error) {
-            console.log(error)
-
-        }
-
-
-    })
-});
-
-
-
-function updateBtn10(FR){
-    FR.hide()
-    
-}
 
 
 });    
 
+$('.PostDelete').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    this_.attr('class','btn btn-danger btn-ok PostDelete disabled')
+    this_.children().attr('class','fa fa-cog fa-spin')
 
+    id = this_.attr('id')
+    id2 = '#id'+id
+
+    var DeleteUrl = this_.attr("data-href")
+    $.ajax({
+        url: DeleteUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            $('.close1').click()
+            $(id2).remove()
+           
+
+
+
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+    
+    
+});
+
+function DeletePostFunction(en){
+    var this_ = $('#'+ en.id)
+    var LikeUrl = this_.attr("data-href")
+    
+    this_.attr('class','btn btn-danger btn-ok PostDelete disabled text-white ')
+    this_.children().attr('class','fa fa-cog fa-spin')
+
+    id = en.id
+    id2 = '#id'+id
+
+    var DeleteUrl = this_.attr("data-href")
+    $.ajax({
+        url: DeleteUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+            $('.close1').click()
+            $(id2).hide()
+           
+
+
+
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+}
+
+function LikePostBtn(en){
+    var this_ = $('#'+ en.id)
+    
+    var LikeUrl = this_.attr("data-href")
+    var id = en.id
+    $.ajax({
+        url: LikeUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+
+            if (data.like){
+
+                this_.attr('class','card-link text-primary LikeBtn IconBtn pointer')
+                var likesOld = $('.LikeCount'+id).attr('num')
+                var likes = parseInt(likesOld)+1
+                $('.LikeCount'+id).attr('num',likes)
+                $('.LikeCount'+id).text(likes)
+                
+                
+            }
+            else{
+                this_.attr('class','card-link text-secondary LikeBtn IconBtn pointer')
+                var likesOld2 = $('.LikeCount'+id).attr('num')
+                var likes2 = parseInt(likesOld2)-1
+                $('.LikeCount'+id).attr('num',likes2)
+                $('.LikeCount'+id).text(likes2)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+}
 </script>
 
 
 {% endif %}
+<script type="text/javascript">
+
+$('.ShareBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var id    = this_.attr('id')
+    var element = '#'+id
+    
+    var temp = $("<input>")
+    $("body").append(temp);
+    temp.val($(element).attr('link')).select();
+    document.execCommand("copy");
+    temp.remove();
+    $(".copyText").remove()
+    $(element).after('<i class="copyText"> link copied</i>')
+    $(".copyText").delay(2000).fadeOut( 400 )
+
+
+})
+
+function ShareBtnFunction(en){
+    var id = en.id
+    var element = '#'+id
+    var temp = $("<input>")
+    $("body").append(temp);
+    temp.val($(element).attr('link')).select();
+    document.execCommand("copy");
+    temp.remove();
+    $(".copyText").remove()
+    $(element).after('<i class="copyText"> link copied</i>')
+    $(".copyText").delay(2000).fadeOut( 400 )
+}
+
+var working = false;
+
+$(window).scroll(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    last_id = $(".PostData:last").attr("pk")
+    
+    if ($(this).scrollTop() + 1 >= $('body').height() - $(window).height()) {
+        //alert('1:'+working)
+        
+        
+        if (working == false) {
+            working = true
+            //alert('2:'+working)
+            $('.loadingIcon').children().attr('class','fa fa-cog fa-spin text-info display-4')
+            setTimeout(function() {
+                $('.loadingIcon').children().attr('class','')
+                
+                
+                }, 10000)
+
+        $.ajax({
+            url: '{{profile.load_more_posts_url}}',
+            method: 'GET',
+            data: {"last_id":last_id},
+
+            success: function (data) {
+                $('.loadingIcon').children().attr('class','')
+            
+                thedata = data.posts
+                console.log(thedata)
+                
+                $.each(thedata, function(i, value){
+                    console.log(i,value.fields.content,value.fields.author);
+                    var time = new Date(value.fields.date_posted)
+                    var date_posted2 = jQuery.timeago(time)
+                    var date_posted = date_posted2.replace("about","");
+                    
+                    var fields = value.fields
+                    var urls = value.urls
+                    var functions = value.functions
+
+                    var post_image = ''
+
+                    if (fields.image == false){
+                        post_image = ''
+                    }else {
+                        post_image = '<br><img class="card-img profile " height="375px" src="'+fields.image+'" id="i'+fields.id+'">'
+
+                                    
+
+                    }
+                    var follows_you = ''
+
+                    if (fields.follows_you == false){
+                        follows_you = ''
+                    }else {
+                        follows_you = ' | <n class="bg-light"> Follows You</n>'
+                    }
+
+                    var veryfied = ''
+
+                    if (fields.is_veryfied == false){
+                        veryfied = ''
+                    }else {
+                        veryfied = ' <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>'
+                    }
+                    if (fields.draft == false){
+                        draft = ''
+                    }else {
+                        draft = ' <b class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="private"></b>'          
+                    }
+
+
+                    var dropdown = ''
+
+                    if (fields.post_for_you == false){
+                        dropdown2 = '<div class="dropdown"><button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button><div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1"><a class="dropdown-item" href="#">Report</a></div></div>'
+                    }else {
+                        dropdown = '<div class="dropdown"><button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button><div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1"><a class="dropdown-item" href="'+urls.post_edit_url+'">Edit</a><a class="dropdown-item" href="" data-toggle="modal" data-target="#confirm-delete'+fields.slug+'">Delete</a></div></div><div class="modal fade" id="confirm-delete'+fields.slug+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5>Delete Post</h5></div><div class="modal-body"><h5>Are you sure you want to <b>delete</b> this post?</h5></div><div class="modal-footer"><a id="post'+fields.slug+'"  class="pointer text-white btn btn-danger btn-ok PostDelete " onClick="DeletePostFunction(post'+ fields.slug +')" data-href="'+urls.post_delete_url+'">Yes, Delete <b> </b></a><button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button></div></div></div></div>'
+                    }
+                    var liked = ''
+
+                    if (fields.liked == false){
+                        liked = '<a id="postnew'+ fields.id+'"  data-href="'+urls.api_add_like_url+'" onClick="LikePostBtn(postnew'+ fields.id +')" class="card-link text-secondary LikeBtn IconBtn pointer"><i class="fa fa-heart "></i> <b class="LikeCountpostnew'+ fields.id+'" num='+fields.likes+'>'+fields.likes+'</b></a>'
+                    }else {
+                        liked = '<a id="postnew'+ fields.id+'"  data-href="'+urls.api_add_like_url+'" onClick="LikePostBtn(postnew'+ fields.id +')" class="card-link text-primary LikeBtn IconBtn pointer"><i class="fa fa-heart "></i> <b class="LikeCountpostnew'+ fields.id+'" num='+fields.likes+'>'+fields.likes+'</b></a>'
+                    }
+
+                    
+                    var the_links = functions.links_all
+                    //var text = $(this).html()
+                   
+                    var the_content = fields.content
+                    if (the_links == ''){
+                        
+                    } else {  
+                            $.each(the_links, function(i, value){
+                                var link3 = value.replace(" ","");
+
+                                link4 = (link3.substr(0,30) + "...");
+
+                                the_content = the_content.replace(value," <a class='userlinkname' target='_blank' href='"+link3+"'>"+link4+"</a>");
+                            }) 
+
+                } 
+
+                    
+                    all_the_content = $("<a>", {href: urls.get_absolute_url_2, "class": "text-dark userlinkname"}).html('<div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> '+date_posted+' </div><p id="content'+fields.id+'" class="card-text">'+the_content+'</p>'+post_image)
+                    
+                    
+
+                    var div_content = '<div class="thedatapost'+fields.slug+'"></div>'
+
+
+                    
+
+                    
+                    LoadTheNewPosts(
+                        the_content,
+                        value.pk,
+                        fields.slug,
+                        urls.profile_url,
+                        fields.id,
+                        fields.profile_image,
+                        fields.Name,
+                        fields.author,
+                        post_image,
+                        fields.likes,
+                        urls.get_absolute_url_2,
+                        date_posted,
+                        follows_you,
+                        veryfied,
+                        dropdown,
+                        functions.comments_all,
+                        liked,
+                        div_content,
+                        draft,
+                        all_the_content
+                        )
+                    
+                });
+                setTimeout(function() {
+                    working = false;
+                    //alert('3:'+working)
+                }, 400)
+
+
+
+            },
+            error: function (error) {
+                
+                console.log(error)
+
+            }
+
+
+        })}
+    }
+});
+
+
+function LoadTheNewPosts(content,pk,slug,profile_url,post_id,profile_image,Name,username,post_image,likes,post_url,time,follows_you,is_veryfied,dropdown,comments_all,liked,div_content,draft,all_the_content){
+    $(".PostData:last").after('<br class="d-block d-lg-none"><div class="card gedf-card PostData" id="idpost'+slug+'" pk="'+pk+'"><div class="card-header"><div class="d-flex justify-content-between align-items-center"><div class="d-flex justify-content-between align-items-center"><div class="profile-card-22 ml-3"><a href="'+profile_url+'"><img  id="p'+post_id+'" class="rounded-circle profile " width="45" height="45" src="'+profile_image+'" alt=""></a></div><div><a href="'+profile_url+'" class="card-title userlinkname"><div class="h5 m-0 ">'+Name+is_veryfied+'</div></a><div class="h7 text-muted">'+username + follows_you+'</div></div></div><div>{% if request.user.is_authenticated %}'+dropdown+'{% endif %}</div></div></div><div class="card-body">'+div_content+'</div><div class="card-footer">{% if request.user.is_authenticated %}'+liked+'{% else %}<a  href="{% url "login" %}"  class="card-link text-secondary  IconBtn "><i class="fa fa-heart "></i> <b>'+likes+'</b></a>{% endif %}<n class="card-link text-secondary IconBtn"><i class="fa fa-comment"></i><b> '+comments_all+'</b></n><a  id="c'+post_id+'" onClick="ShareBtnFunction(c'+ post_id +')" link="http://localhost:8000'+post_url+'"  class="card-link text-secondary IconBtn ShareBtn pointer"><i class="fa fa-share-alt"></i></a></div></div>')
+
+    $(".thedatapost"+slug).append(all_the_content)
+    
+}
+</script>
 {% endblock javascript %}
 
+
+                            

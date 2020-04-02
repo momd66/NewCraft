@@ -88,7 +88,7 @@ body{
 
 .dateJoined{
     position: absolute;
-    top:86px;
+    top:105px;
     left: 40px;
 
 
@@ -96,7 +96,7 @@ body{
 
 .dateJoined2{
     position: absolute;
-    top:90px;
+    top:109px;
     left: 41px;
 
 
@@ -107,6 +107,7 @@ body{
     width:100%;
     background: #fff;
     padding:10px 0;
+    
 }
 .promote{
     border:1px dashed #ddd;

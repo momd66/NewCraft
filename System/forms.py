@@ -12,6 +12,7 @@ User = get_user_model()
 
 
 class UserRegisterForm(forms.ModelForm):
+	first_name = forms.CharField(label="Name",widget=forms.TextInput(attrs={'maxlength':20}))
 	username  = forms.CharField(widget=forms.TextInput(attrs={'maxlength':20}))
 	email     = forms.EmailField(label="Email")
 	password1 = forms.CharField(label="Password",widget=forms.PasswordInput)
@@ -19,20 +20,33 @@ class UserRegisterForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		fields = ["username","email","password1","password2"]
+		fields = ["first_name","username","email","password1","password2"]
 
 
 	def clean(self,*args,**kwargs):
 		userName = self.cleaned_data.get("username")
-		countUsername = len(userName)
-		if countUsername >= 21:
-			raise forms.ValidationError("The username max length is 20 letters!") 
+		if userName != None:
+			countUsername = len(userName)
+			if countUsername >= 21:
+				raise forms.ValidationError("The  max length for the username is 20 letters!")
+		else:
+			raise forms.ValidationError("The 'username' field is required!") 
 
 		email    = self.cleaned_data.get("email") 
 
 		email_qs = User.objects.filter(email=email)
 		if email_qs.exists():
 			raise forms.ValidationError("This email is already being used")
+
+		First_name = self.cleaned_data.get("first_name")
+		if First_name != None:
+			countFisrtname = len(First_name)
+			if countFisrtname >= 21:
+				raise forms.ValidationError("The  max length for the Name is 20 letters!")
+		else:
+			raise forms.ValidationError("The 'Name' field is required!")
+		
+		
 
 		password1 = self.cleaned_data.get("password1")
 		password2 = self.cleaned_data.get("password2")

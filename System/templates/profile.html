@@ -8,25 +8,29 @@
 <link rel="stylesheet" type="text/css" href="{% static 'profile/style.css' %}">
 
 {% endblock %}
-
+<style type="text/css">
+  .contop{
+    padding-bottom: 0px;
+}
+</style>
 <div class="container portfolio ">
-	<div class="row ">
-		<div class="col-md-12">
-			<div class="heading">				
-				<img src="https://image.ibb.co/cbCMvA/logo.png" />
-			</div>
-		</div>	
-	</div>
-	<div class="bio-info card">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="bio-image d-none d-lg-block">
-							<a href="{{user.profile.get_absolute_url}}">
-								<img id="imgProfile1" width="280" height="280" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
-							</a>
-						</div>
+  <div class="row ">
+    <div class="col-md-12">
+      <div class="heading">
+        <img src="https://image.ibb.co/cbCMvA/logo.png" />
+      </div>
+    </div>
+  </div>
+  <div class="bio-info card">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="bio-image d-none d-lg-block">
+              <a href="{{user.profile.get_absolute_url}}">
+                <img id="imgProfile1" width="280" height="280" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="image" />
+              </a>
+            </div>
             <script type="text/javascript">
                         var img_S1 = document.getElementById("imgProfile1")
                         var img_B1 = document.createElement('img')
@@ -34,16 +38,16 @@
                             img_S1.src = this.src
                         }
                         setTimeout(function(){
-                           img_B1.src = '{{ user.profile.image.url }}' 
-                        },50)  
+                           img_B1.src = '{{ user.profile.image.url }}'
+                        },50)
 
-                          
+
             </script>
-						<div class="bio-image d-none d-md-block d-lg-none">
-							<a href="{{user.profile.get_absolute_url}}">
-								<img id="imgProfile2" width="250" height="250" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
-							</a>
-						</div>
+            <div class="bio-image d-none d-md-block d-lg-none">
+              <a href="{{user.profile.get_absolute_url}}">
+                <img id="imgProfile2" width="250" height="250" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="image" />
+              </a>
+            </div>
                         <script type="text/javascript">
                         var img_S2 = document.getElementById("imgProfile2")
                         var img_B2 = document.createElement('img')
@@ -51,16 +55,16 @@
                             img_S2.src = this.src
                         }
                         setTimeout(function(){
-                           img_B2.src = '{{ user.profile.image.url }}' 
-                        },50)  
+                           img_B2.src = '{{ user.profile.image.url }}'
+                        },50)
 
-                          
+
             </script>
-						<div class="bio-image d-md-none">
-							<a href="{{user.profile.get_absolute_url}}">
-								<img id="imgProfile3" width="190" height="190" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" alt="image" />
-							</a>
-						</div>
+            <div class="bio-image d-md-none">
+              <a href="{{user.profile.get_absolute_url}}">
+                <img id="imgProfile3" width="190" height="190" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="image" />
+              </a>
+            </div>
                         <script type="text/javascript">
                         var img_S3 = document.getElementById("imgProfile3")
                         var img_B3 = document.createElement('img')
@@ -68,80 +72,90 @@
                             img_S3.src = this.src
                         }
                         setTimeout(function(){
-                           img_B3.src = '{{ user.profile.image.url }}' 
-                        },50)  
+                           img_B3.src = '{{ user.profile.image.url }}'
+                        },50)
 
-                          
+
             </script>
-					</div>
-				</div>	
-			</div>
-			<article class="col-md-6 media-body">
-				<div class="bio-content profile-card-2" id="profileInfo">
-					<h1 class="ProfileName ProfileData article-title d-none d-md-block" name="UserName">{{ user.username}}</h1>
-					<h3 class="ProfileName ProfileData article-title d-md-none" name="UserName">{{ user.username }}</h3>
-					<h6 class="ProfileEmail ProfileData">{{ user.email }}</h6>
-					<div class="lead ProfileDescription ProfileData" name="Description">{{user.profile.description}}</div>
-					<hr>
-					<div style="text-align:center;" class="icon-block">
-
-						{% if user.profile.facebock %}
-							<a href="{{user.profile.facebock}}" target="_blank">
-								<i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="{{user.profile.facebock|truncatechars:25}}"></i>
-							</a>
-                       	{% endif %}
-
-                       	{% if user.profile.twitter %}
-                       		<a href="{{user.profile.twitter}}" target="_blank">
-                       			<i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="{{user.profile.twitter|truncatechars:25}}"></i>
-                       		</a>
-                       	{% endif %}
-
-                       	{% if user.profile.linkedin %}
-                       		<a href="{{user.profile.linkedin}}" target="_blank">
-                        		<i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="{{user.profile.linkedin|truncatechars:25}}"></i>
-                       		</a>
-                      	{% endif %}
-
-                    	{% if user.profile.instagram %}
-                      		<a href="{{user.profile.instagram}}" target="_blank">
-                				<i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" title="{{user.profile.instagram|truncatechars:25}}"></i>
-                   			</a>
-               			{% endif %}
-
-                  		{% if user.profile.reddit %}
-                   			<a href="{{user.profile.reddit}}" target="_blank">
-                   				<i class="fa fa-reddit" data-toggle="tooltip" data-placement="top" title="{{user.profile.reddit|truncatechars:25}}"></i>
-                 			</a>
-                     	{% endif %}
-
-                     	{% if user.profile.snapchat %}
-                 			<a href="{{user.profile.snapchat}}" target="_blank">
-                     			<i class="fa fa-snapchat" data-toggle="tooltip" data-placement="top" title="{{user.profile.snapchat|truncatechars:25}}"></i>
-                   		</a>
-
-                     	{% endif %}
-
-                     	{% if user.profile.youtube %}
-    						<a href="{{user.profile.youtube}}" target="_blank">
-                        		<i class="fa fa-youtube-play" data-toggle="tooltip" data-placement="top" title="{{user.profile.youtube|truncatechars:25}}"></i>
-                      		</a>
-                   		{% endif %}
-
+          </div>
+        </div>
+      </div>
+      <article class="col-md-6 media-body">
+        <div class="bio-content profile-card-2" id="profileInfo">
+          <h1 class="ProfileName ProfileData article-title d-none d-md-block" name="UserName">{{ user.first_name}}</h1>
+          <h3 class="ProfileName ProfileData article-title d-md-none" name="UserName">{{ user.first_name }}</h3>
+          <h5 class="ProfileEmail ProfileData text-dark">{{ user.email }}</h5>
+          <div class="lead">{{ user.username }}</div>
+          <div class="lead ProfileDescription ProfileData" name="Description">{{user.profile.description}}</div>
+          
+          
+          <div style="text-align:center;" class="icon-block" id="sochalInfo">
+          <hr class="ProfileData" id="new">
                         {% if user.profile.email %}
-                          	<a href="mailto:{{user.profile.email}}">
-                              	<i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="{{user.profile.email|truncatechars:15}}"></i>
-	                       	</a>
-	               		{% endif %}
-                   	</div>
-					<a class="btn btn-outline-info btnsize my-2" onClick="editProfile('{{ user.username}}')" 
-					data-toggle="modal" data-target="#myModal">
-					Edit Profile</a>
-					<a class="btn btn-info btnsize my-2" href="{% url 'logout' %}">Logout</a>
-				</div>
-			</article>
-		</div>	
-	</div>
+                            <a  id="EmailLink" href="mailto:{{user.profile.email}}" name="EmailLink">
+                                <i class="fa fa-envelope EmailLink" email="{{user.profile.email}}"  data-toggle="tooltip" data-placement="top" title="{{user.profile.email|truncatechars:15}}"></i>
+                          </a>
+                        {% endif %}  
+
+                        {% if user.profile.facebock %}
+                        <a id="FacebockLink" href="{{user.profile.facebock}}" target="_blank">
+                            <i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="{{user.profile.facebock|truncatechars:25}}"></i>
+                        </a>
+                        {% endif %}
+
+                        {% if user.profile.twitter %}
+                          <a id="TwitterLink" href="{{user.profile.twitter}}" target="_blank">
+                            <i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="{{user.profile.twitter|truncatechars:25}}"></i>
+                          </a>
+                        {% endif %}
+
+                        {% if user.profile.linkedin %}
+                          <a id="LinkedInLink" href="{{user.profile.linkedin}}" target="_blank">
+                            <i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="{{user.profile.linkedin|truncatechars:25}}"></i>
+                          </a>
+                        {% endif %}
+
+                      {% if user.profile.instagram %}
+                          <a id="InstagramLink" href="{{user.profile.instagram}}" target="_blank">
+                        <i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" title="{{user.profile.instagram|truncatechars:25}}"></i>
+                        </a>
+                    {% endif %}
+
+                      {% if user.profile.youtube %}
+                          <a id="YoutubeLink" href="{{user.profile.youtube}}" target="_blank">
+                            <i class="fa fa-youtube-play" data-toggle="tooltip" data-placement="top" title="{{user.profile.youtube|truncatechars:25}}"></i>
+                          </a>
+                      {% endif %}
+
+
+                    </div>
+          <a class="btn btn-outline-info btnsize my-2" href="{% url 'post-create' %}">Post</a>
+          <a href="" class="btn btn-outline-info btnsize my-2" onClick="editProfile('{{ user.username}}')"
+          data-toggle="modal" data-target="#myModal">
+          Edit Profile</a>
+          <a class="btn btn-info text-white btnsize my-2"  data-toggle="modal" data-target="#confirm-logout"><e class="fa fa-sign-out"></e> Logout</a>
+              <div class="modal fade" id="confirm-logout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="text-dark">Logout</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h5 class="text-dark">Are you sure you want to logout?</h5>
+                            </div>
+                            <div class="modal-footer">                   
+                                <a  class="btn btn-primary btn-ok" href="{% url 'logout' %}" > 
+                                    <e class="fa fa-sign-out"></e> Logout
+                                </a>
+                                <button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+      </article>
+    </div>
+  </div>
 </div>
 
 <!--Modal Profile-->
@@ -151,36 +165,98 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-        	<h4 class="modal-title" id="myModalLabel">Update Profile</h4>
-        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        		<span aria-hidden="true">x</span>
-        	</button>
+          <h4 class="modal-title" id="myModalLabel">Update Profile</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+          </button>
         </div>
         <form id="updateProfile" action="">
-        	<div class="modal-body">
-        		<label>Image</label><br>
-        		<div class="bio-image p-img">
-        			<a href="{% url 'update-profile' %}">
-        				<img class="profile-img" width="130" height="130" src="{{ user.profile.image.url }}" alt="image" />
-        			</a>
-        		</div>
-        		<br>
-        		<hr>
-        		<a href="{% url 'update-profile' %}">
-        			<img class="b-img img-fluid d-none d-md-block" src="{{ user.profile.background_image.url }}" />
-        			<img class="b-img-s img-fluid d-block d-md-none" src="{{ user.profile.background_image.url }}" />
-        		</a>
-        		<label>Username</label>
-        		<input type="text" class="form-control" id="form-username" type="text"
-        		name="formUsername" maxlength="20" required>
-        		<label>Description</label>
-        		<textarea name="formDescription" id="form-description"
-        		class="form-control" rows="3" maxlength="250" required></textarea>
-        	</div>
-        	<div class="modal-footer">
-        		<button type="submit" class="btn btn-primary">Save changes</button>
-        		<button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
-        	</div>
+          <div class="modal-body">
+            <label>Image</label><br>
+            <div class="bio-image p-img">
+              <a href="{% url 'update-profile' %}">
+                <img class="profile-img" width="130" height="130" id="imgProfile4" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="image" />
+              </a>
+            <script type="text/javascript">
+                        var img_S4 = document.getElementById("imgProfile4")
+                        var img_B4 = document.createElement('img')
+                        img_B4.onload = function(){
+                            img_S4.src = this.src
+                        }
+                        setTimeout(function(){
+                           img_B4.src = '{{ user.profile.image.url }}'
+                        },50)
+
+
+            </script>
+
+            </div>
+            <br>
+            <hr>
+            <a href="{% url 'update-profile' %}">
+              <img class="b-img img-fluid d-none d-md-block" id="b_img_S1" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" />
+              <img class="b-img-s img-fluid d-block d-md-none" id="b_img_S2" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" />
+            </a>
+                   <script type="text/javascript">
+                        var b_img_S1 = document.getElementById("b_img_S1")
+                        var b_img_S2 = document.getElementById("b_img_S2")
+
+                        var b_img_B = document.createElement('img')
+                        b_img_B.onload = function(){
+                            b_img_S1.src = this.src
+                            b_img_S1.className = "b-img img-fluid d-none d-md-block noblur";
+                            b_img_S2.src = this.src
+                            b_img_S2.className = "b-img-s img-fluid d-block d-md-none noblur";
+
+                        }
+                        setTimeout(function(){
+                           b_img_B.src = '{{ user.profile.background_image.url }}' ;
+                           
+                       },50)
+
+                    </script>
+
+            <label>Name</label>
+            <input type="text" class="form-control" id="form-username"
+            name="formUsername" maxlength="20" required>
+
+            <label>Bio</label>
+            <textarea name="formDescription" id="form-description"
+            class="form-control" rows="3" maxlength="250"></textarea>
+            <br>
+            
+            
+            <input type="hidden" class="form-control" id="form-Email" 
+            name="formEmail" >
+
+            <input type="hidden" class="form-control" id="form-LinkedIn" 
+            name="formLinkedIn" >
+            <h5>Links</h5>
+            <hr>
+
+
+            <label>Twitter</label>
+            <input type="url" class="form-control" id="form-twitter" 
+            name="formTwitter" >
+
+            <label>Youtube</label>
+            <input type="url" class="form-control" id="form-youtube" 
+            name="formYoutube" >
+
+            <label>Instagram</label>
+            <input type="url" class="form-control" id="form-instagram" 
+            name="formInstagram" >
+
+            <label>Facebock</label>
+            <input type="url" class="form-control" id="form-facebock" 
+            name="formFacebock" >
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="save">Save changes <b></b></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+          </div>
         </form>
       </div>
     </div>
@@ -195,57 +271,124 @@
 
 
 function editProfile(username){
-	if (username) {
-		usernameTxet = $('h1.ProfileName').text();
-		descriptionText = $('div.ProfileDescription').text();
-		$('#form-username').val(usernameTxet);
-		$('#form-description').val(descriptionText);
-	}
+  if (username) {
+    usernameTxet = $('h1.ProfileName').text();
+    descriptionText = $('div.ProfileDescription').text();
+    EmailText = $('i.EmailLink').attr('email');
+    LinkedInText = $('a#LinkedInLink').attr('href');
+    TwitterText  = $('a#TwitterLink').attr('href');
+    InstagramText  = $('a#InstagramLink').attr('href');
+    YoutubeText  = $('a#YoutubeLink').attr('href');
+    FacebockText  = $('a#FacebockLink').attr('href');
+
+    $('#form-username').val(usernameTxet);
+    $('#form-description').val(descriptionText);
+    $('#form-Email').val(EmailText);
+    $('#form-LinkedIn').val(LinkedInText);
+    $('#form-twitter').val(TwitterText);
+    $('#form-instagram').val(InstagramText);
+    $('#form-youtube').val(YoutubeText);
+    $('#form-facebock').val(FacebockText);
+  }
 }
 
 $('form#updateProfile').submit(function(){
-	//var idInput = $('input[name="formId"]').val().trim();
-	var UsernameInput    = $('input[name="formUsername"]').val().trim();
-	var descriptionInput = $('textarea[name="formDescription"]').val().trim();
+  //var idInput = $('input[name="formId"]').val().trim();
+  var UsernameInput    = $('input[name="formUsername"]').val().trim()
+  var descriptionInput = $('textarea[name="formDescription"]').val().trim();
+  var EmailInput       = $('input[name="formEmail"]').val().trim();
+  var LinkedInInput    = $('input[name="formLinkedIn"]').val().trim();
+  var TwitterInput     = $('input[name="formTwitter"]').val().trim();
+  var InstagramInput   = $('input[name="formInstagram"]').val().trim();
+  var YoutubeInput     = $('input[name="formYoutube"]').val().trim();
+  var FacebockInput    = $('input[name="formFacebock"]').val().trim();
+
+  $('#save').attr('class','disabled btn btn-primary')
+  $('#save').children().attr('class','fa fa-cog fa-spin')
+
+  $('input[name="formUsername"]').attr('disabled','')
+  $('input[name="formUsername"]').attr('value',UsernameInput)
+
+  $('textarea[name="formDescription"]').attr('disabled','')
+  $('textarea[name="formDescription"]').text(descriptionInput)
+
+  $('input[name="formTwitter"]').attr('disabled','')
+  $('input[name="formTwitter"]').attr('value',TwitterInput)
+
+  $('input[name="formInstagram"]').attr('disabled','')
+  $('input[name="formInstagram"]').attr('value',InstagramInput)
+
+  $('input[name="formYoutube"]').attr('disabled','')
+  $('input[name="formYoutube"]').attr('value',YoutubeInput)
+
+  $('input[name="formFacebock"]').attr('disabled','')
+  $('input[name="formFacebock"]').attr('value',FacebockInput)
 
 
-	if(UsernameInput){
+  if(UsernameInput){
 
-		$.ajax({
-			url:"{% url 'profile-update' %}",
-			data:{
-				'username2':UsernameInput,
-				'description2':descriptionInput
+    $.ajax({
+      url:"{% url 'profile-update' %}",
+      data:{
+        'username2':UsernameInput,
+        'description2':descriptionInput,
+        'twitter2':TwitterInput,
+        'instagram2':InstagramInput,
+        'youtube2':YoutubeInput,
+        'facebock2':FacebockInput,
 
-			
 
-			},
-			dataType:'json',
-			success:function(data){
-				if (data.profile) {
-					updateProfile(data.profile)
-				}
-			},
-			error:function(){
-				countUsername = (UsernameInput.length);
 
-				if (countUsername >= 21){
-					alert("The username max length is 20 letters!")
-				}
-				else{
-					alert("This username is taken or is unusable!")
-				}
-			}
+      },
+      dataType:'json',
+      success:function(data){
+        if (data.profile) {
+          $('#close').click()
+          $('#save').attr('class','btn btn-primary')
+          $('#save').children().attr('class','')
+          updateProfile(data.profile)
+          updateTwitter(data.profile)
+          updateInstagram(data.profile)
+          updateYoutibe(data.profile)
+          updateFacebock(data.profile)
 
-		})
 
-	}
-	else {
-		alert("All fields most have a value.");
+          $('input[name="formUsername"]').attr('disabled',false)
+          $('input[name="formUsername"]').attr('value',UsernameInput)
 
-	}
-	$('form#updateProfile').trigger("reset");
-	$('#close').click()
+          $('textarea[name="formDescription"]').attr('disabled',false)
+          $('textarea[name="formDescription"]').attr('value',descriptionInput)
+
+          $('input[name="formTwitter"]').attr('disabled',false)
+          $('input[name="formTwitter"]').attr('value',TwitterInput)
+
+          $('input[name="formInstagram"]').attr('disabled',false)
+          $('input[name="formInstagram"]').attr('value',InstagramInput)
+
+          $('input[name="formYoutube"]').attr('disabled',false)
+          $('input[name="formYoutube"]').attr('value',YoutubeInput)
+
+          $('input[name="formFacebock"]').attr('disabled',false)
+          $('input[name="formFacebock"]').attr('value',FacebockInput)
+        }
+      },
+      error:function(){
+        countUsername = (UsernameInput.length);
+
+        if (countUsername >= 21){
+          alert("The username max length is 20 letters!")
+        }
+      }
+
+    })
+
+  }
+  else {
+    alert("All fields most have a value.");
+
+  }
+  $('form#updateProfile').trigger("reset");
+  
     return false;
 
 
@@ -255,16 +398,111 @@ $('form#updateProfile').submit(function(){
 
 
 function updateProfile(profile){
-	$('#profileInfo').children('.ProfileData').each(function(){
-		var attr = $(this).attr("name");
-		if (attr == 'UserName'){
-			$(this).text(profile.username);
-		}else if (attr == 'Description'){
-			$(this).text(profile.description);
-		}
-		
-	})
+  $('#profileInfo').children('.ProfileData').each(function(){
+    var attr = $(this).attr("name");
+    if (attr == 'UserName'){
+      $(this).text(profile.username);
+    }else if (attr == 'Description'){
+      $(this).text(profile.description);
+    }
+
+  })
 }
+
+
+
+function updateTwitter(profile){
+  
+    if ( $('#TwitterLink').length ){
+      var TwitterOld = $(this).attr("href")
+      if (profile.twitter == ''){
+        $('#TwitterLink').remove()
+      }else if(TwitterOld == profile.twitter | TwitterOld == profile.twitter){
+        
+      }else if(TwitterOld != profile.twitter){
+        $('#TwitterLink').attr('href',profile.twitter)
+        $('#TwitterLink').children().attr('title',profile.twitter)
+        $('#TwitterLink').children().attr('data-original-title',profile.twitter)
+
+
+      }
+    }else{
+      if (profile.twitter != ''){
+        $('#new').after('<a id="TwitterLink" href="'+ profile.twitter +'" target="_blank"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="'+ profile.twitter +'"></i></a>')
+      }
+    }
+      
+}
+
+function updateInstagram(profile){
+  
+    if ( $('#InstagramLink').length ){
+      var InstagramOld = $(this).attr("href")
+      if (profile.instagram == ''){
+        $('#InstagramLink').remove()
+      }else if(InstagramOld == profile.instagram | InstagramOld == profile.instagram){
+        
+      }else if(InstagramOld != profile.instagram){
+        $('#InstagramLink').attr('href',profile.instagram)
+        $('#InstagramLink').children().attr('title',profile.instagram)
+        $('#InstagramLink').children().attr('data-original-title',profile.instagram)
+
+
+      }
+    }else{
+      if (profile.instagram != ''){
+        $('#new').after('<a id="InstagramLink" href="'+ profile.instagram +'" target="_blank"><i class="fa fa-instagram" data-toggle="tooltip" data-placement="top" title="'+ profile.instagram +'"></i></a>')
+      }
+    }
+      
+}
+
+function updateYoutibe(profile){
+  
+    if ( $('#YoutubeLink').length ){
+      var YoutubeOld = $(this).attr("href")
+      if (profile.youtube == ''){
+        $('#YoutubeLink').remove()
+      }else if(YoutubeOld == profile.youtube | YoutubeOld == profile.youtube){
+        
+      }else if(YoutubeOld != profile.youtube){
+        $('#YoutubeLink').attr('href',profile.youtube)
+        $('#YoutubeLink').children().attr('title',profile.youtube)
+        $('#YoutubeLink').children().attr('data-original-title',profile.youtube)
+
+
+      }
+    }else{
+      if (profile.youtube != ''){
+        $('#new').after('<a id="YoutubeLink" href="'+ profile.youtube +'" target="_blank"><i class="fa fa-youtube-play" data-toggle="tooltip" data-placement="top" title="'+ profile.youtube +'"></i></a>')
+      }
+    }
+      
+}
+
+function updateFacebock(profile){
+  
+    if ( $('#FacebockLink').length ){
+      var FacebockOld = $(this).attr("href")
+      if (profile.facebock == ''){
+        $('#FacebockLink').remove()
+      }else if(FacebockOld == profile.facebock | FacebockOld == profile.facebock){
+        
+      }else if(FacebockOld != profile.facebock){
+        $('#FacebockLink').attr('href',profile.facebock)
+        $('#FacebockLink').children().attr('title',profile.facebock)
+        $('#FacebockLink').children().attr('data-original-title',profile.facebock)
+
+
+      }
+    }else{
+      if (profile.facebock != ''){
+        $('#new').after('<a id="FacebockLink" href="'+ profile.facebock +'" target="_blank"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="'+ profile.facebock +'"></i></a>')
+      }
+    }
+      
+}
+
 
 
 

@@ -1,10 +1,24 @@
 
 {% load static %}
+<style type="text/css">
+	.SearchClass{
+	padding:15px;
+	padding-top:0;
+}
+
+.loginLinkStyle{
+	position: absolute;
+	font-size: 25px;
+	right: 30px !important;
+
+	top: 16px;
+}
+</style>
 
 <link rel="stylesheet" type="text/css" href="{% static 'navbar/style.css' %}">
 
 <nav class="navbar navbar-expand-md bg-info navbar-dark my_nav">
-	<a class="navbar-brand d-none d-md-block" href="{% url 'home' %}">AeDeSe</a>
+	<a class="navbar-brand d-none d-md-block" href="{% url 'home' %}"><b>MC</b>Player</a>
 
 	<!--navbar toggler-->
 
@@ -30,7 +44,11 @@
 
 		{% if user.is_authenticated %}
 
-			<li class="nav-item"><a class="nav-link {{active.ActivePost}}" href="#">Post</a></li>
+			
+			<li class="nav-item">
+				<a class="nav-link {{active.ActiveFollowing}}" href="{% url 'following-list' %}">Followings</a>
+			</li>
+			<li class="nav-item"><a class="nav-link {{active.ActivePost}}" href="{% url 'post-create' %}">Post</a></li>
 
 		{% endif %}
 
@@ -40,15 +58,16 @@
 
 		</ul>
 
-		<div class="col-md-6 searchform d-none {{active.HomeBlockMd}}">
+		<div class="col-md-6 searchform d-none d-md-block SearchClass">
 			<form class="navbar-form" role="search">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+					<input type="text" class="form-control" id="SearchField" placeholder="Search" onkeypress="" name="q" value="{{ request.GET.q }}">
 					<div class="input-group-btn">
-						<button class="btn btn-outline-info searchButton" type="submit">
+						<a class="btn btn-outline-info searchButton" onclick="Search()"  type="submit">
 							<i class="material-icons" data-toggle="tooltip" data-placement="top" title="Search">search</i>
-						</button>
+						</a>
 					</div>
+
 				</div>
 			</form>
 		</div>
@@ -65,9 +84,9 @@
 			<!--profile img-->
 		<div class="ProfileImg">
 
-			<a href="{% url 'profile' %}" data-toggle="tooltip" data-placement="top" title="Profile"> 
+			<a href="{% url 'profile' %}" > 
 				<img class="rounded-circle account-img nav-item d-none d-md-block ml-2 profile_img {{NoneProfile}} {{active.ActiveProfile}} {{ActiveProfile}}" 
-				width="55" height="55" id="NavImg" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png">
+				width="55" height="55" id="NavImg" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn">
 			</a>
 
 
@@ -102,15 +121,20 @@
 
 	<div class="HomeLink d-block d-md-none">
     	<a class="HomeLinkStyle {{active.ActiveHome}}" href="{% url 'home' %}"><i class="material-icons">home</i></a>
+
 	</div>
+	{% if not user.is_authenticated %}
+	<div class="d-block d-md-none">
+		<a class="HomeLinkStyle loginLinkStyle {{ActiveLogin}}" href="{% url 'login' %}"><i class="fa fa-sign-in"></i></a>
+	</div>
+	{% endif %}
 
-
-	<div class="col-6 searchformSmall d-none d-md-none {{active.HomeBlock}}">
+	<div class="col-6 searchformSmall d-md-none">
 		<form class="navbar-form" role="search">
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+				<input type="text" class="form-control" id="SearchField2" placeholder="Search" name="q" value="{{ request.GET.q }}">
 				<div class="input-group-btn">
-					<button class="btn btn-outline-info searchButton" type="submit"><i class="material-icons">search</i></button>
+					<a class="btn btn-outline-info searchButton" onclick="Search2()" type="submit"><i class="material-icons">search</i></a>
 				</div>
 			</div>
 		</form>
@@ -127,9 +151,9 @@
 <div class="ProfileImg">
 
 <a class="d-md-none small_img_position mt-1" href="{% url 'profile' %}" 
-	data-toggle="tooltip" data-placement="top" title="Profile">
+	>
 	<img id="NavImg2" class="rounded-circle account-img profile_img {{NoneProfile}} {{active.ActiveProfile}}" 
-	width="52" height="52" src="https://4.bp.blogspot.com/-H232JumEqSc/WFKY-6H-zdI/AAAAAAAAAEw/DcQaHyrxHi863t8YK4UWjYTBZ72lI0cNACLcB/s1600/profile%2Bpicture.png" >
+	width="52" height="52" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" >
 </a>
 
 </div>

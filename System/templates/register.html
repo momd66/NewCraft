@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
+
+
 {% load crispy_forms_tags %}
 
-{% block content  %}
 
-<form method="POST">{% csrf_token %}
+
+
+
+
+{% block content  %}
+<style type="text/css">
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+</style>
+<div class="background-white ">
+<form class="RequestBtn " method="POST">{% csrf_token %}
 
 	<fieldset class="form-group">
 		<legend class="border-bottom mb-4">Register</legend>
@@ -14,7 +24,7 @@
 	</fieldset>
 
 	<div class="form-group">
-		<button class="btn btn-outline-info" type="submit">Sign Up</button>
+		<button class="btn btn-outline-info RegisterBtn col-12" type="submit"><e class="fa fa-sign-in"> </e> Sign Up <b class=""> </b></button>
 	</div>
 	
 </form>
@@ -32,10 +42,35 @@
 <div class="d-block d-md-none">
 
 <div class="border-top pt-3">
-	<h6 class="text-muted">
+	<h6 class="text-muted ">
 	    Already have an account?<a class="ml-2" href="{% url 'login' %}">Sign In</a>
 	</h6>
 </div>
 
 </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+$(function(){
+
+$('.RequestBtn').submit(function(){
+    var this_ = $('.RegisterBtn')
+    this_.attr('class','btn btn-info col-12')
+    this_.attr('disabled','')
+    
+    this_.children('b').attr('class','fa fa-cog fa-spin')
+
+    
+
+
+
+    })
+});	
+
+
+
+</script>
 {% endblock %}

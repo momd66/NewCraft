@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content  %}
+
+{% block css %}
+<style type="text/css">
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+</style>
+{% endblock %}
+
+
+<form class="background-white container p-2" id="FormId" method="POST" enctype="multipart/form-data">{% csrf_token %}
+	<fieldset class="form-group">
+		<legend class="border-bottom mb-4">Post</legend>
+		
+		{{form|crispy}}
+	</fieldset>
+	<div class="form-group">
+		<button class="btn btn-outline-info RequestBtn col-12" type="submit">Post <b class=""> </b></button>
+	</div>
+	
+</form>
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+$(function(){
+
+$('#FormId').submit(function(){
+    var this_ = $('.RequestBtn')
+    this_.attr('class','btn btn-info col-12' )
+    this_.attr('disabled','')
+
+    
+    this_.children().attr('class','fa fa-cog fa-spin')
+    
+
+
+
+    })
+});	
+
+
+
+</script>
+
+{% endblock %}

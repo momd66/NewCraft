@@ -1,0 +1,591 @@
+{% extends "base.html" %}
+
+
+
+
+{% block cssblock %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'user_detail/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
+{% endblock %}
+
+
+{% block content  %}
+
+{% if messages %}
+<div class="card">
+  <ul class="list-unstyled messages">
+  {% for message in messages %}
+    
+      <li class="alert alert-{{ alert_tag }}">{{ message }}</li>
+   
+  </ul>
+  {% endfor %}
+</div>
+{% endif %}
+
+
+<style type="text/css">
+.contop{
+    padding-bottom: 0px;
+}
+.blur{
+filter: blur(2px);
+transition: all 1s;
+}
+
+.noblur{
+    transition: all 2s;
+}
+#b_img_S1{
+    height: 300!important;
+}
+#b_img_S2{
+    height: 300!important;
+}
+</style>
+<style type="text/css">
+
+.h7 {
+    font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+    margin-top: 0.97rem;
+    }
+
+@media (min-width: 992px) {
+        .gedf-main {
+            padding-left: 4rem;
+            padding-right: 4rem;
+        }
+        .gedf-card {
+            margin-bottom: 2.77rem;
+            }
+        }
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+    content: none;
+    display: none;
+}
+
+.profile-card-22 .profile {
+    border-radius: 50%;
+    max-width: 100px;
+    max-height: 100px;
+    border: 3px solid rgba(255, 255, 255, 1);
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    background-color: white;
+    box-shadow: 0px 0px 4px 0px #b0b3b7;
+}
+
+.IconBtn{
+    font-size: 20px;
+}
+
+</style>
+
+
+
+
+<div class="row">
+<div class="col-lg-8 gedf-main">
+    <br class="d-lg-block">
+    <p id="noPosts" class="lead">The people you follow haven't posted anything yet. You can find some interesting people to follow here: <a class="userlinkname" href="{% url 'home' %}">Home</a></p>
+    {% for post in active.post_list %}
+
+            <div class="card gedf-card PostData" pk="{{post.id}}" id="idpost{{post.slug}}">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="profile-card-22 ml-3">
+                                <a href="{{post.author.profile.get_absolute_url}}">
+                                    <img  id="p{{post.id}}" class="rounded-circle profile " width="45" height="45" src="https://drive.google.com/thumbnail?id=1hn-jqy47zD8v0RnKzd9WufbxgBloDrsn" alt="">
+                                </a>
+                                <script type="text/javascript">
+                                    var img_S{{ post.id }}{{ post.slug }} = document.getElementById("p{{ post.id }}")
+                                    var img_B{{ post.id }}{{ post.slug }} = document.createElement('img')
+                                    img_B{{ post.id }}{{ post.slug }}.onload = function(){
+                                        img_S{{ post.id }}{{ post.slug }}.src = this.src
+                                    }
+                                    setTimeout(function(){
+                                       img_B{{ post.id }}{{ post.slug }}.src = '{{ post.author.profile.image.url }}' 
+                                    },50)  
+                                    $('#noPosts').remove()
+                                </script>
+                            </div>
+                            <div>
+                                <a href="{{post.author.profile.get_absolute_url}}" class="card-title userlinkname">
+                                    <div class="h5 m-0 ">
+                                        {{post.author.first_name}}
+                                        {% if post.author.profile.veryfied %}
+                                            <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                <div class="h7 text-muted">{{post.author.profile.user.username|truncatechars:30}}
+                                    {% if user.profile in post.author.profile.following.all %}
+                                        | <n class='bg-light'> Follows You</n>
+                                    {% endif %} 
+                                </div>
+                            </div>
+                                
+                        </div>
+                        <div>
+                            {% if request.user.is_authenticated %}
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    {% if request.user == post.author %}
+                                        <a class="dropdown-item" href="{{post.post_edit_url}}">Edit</a>
+                                        <a class="dropdown-item" href="" data-toggle="modal" data-target="#confirm-delete{{post.slug}}">Delete</a>
+                                        
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Report</a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body"><a  class="text-dark userlinkname" href="{{post.get_absolute_url_2}}">
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i> {{post.date_posted|timesince}} ago 
+                        {% if post.draft %}
+                            <b class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="private"></b>
+                        {% endif %}
+                    </div>
+                    
+                        <p id="content{{post.id}}" class="card-text">
+                            {{post.content}}
+                        </p>
+                    {% if post.links %}
+                    
+                    <script type="text/javascript">
+                        $("#content{{post.id}}").each(function() {
+                        var text = $(this).html()
+                        //alert("1- "+text)
+                        {% for link in post.links_all %}
+                        var link2 = '{{link}}'.replace(" ","");
+                        var link3 = '{{link|truncatechars:30}}'.replace(" ","");
+                        //text = text.replace('{{link}}',"<a href='{{link}}'>{{link}}</a>");
+                        text = text.replace('{{link}}'," <a class='userlinkname' target='_blank' href='"+link2+"'>"+link3+"</a> ");
+
+                        {% endfor %}
+                        //alert("2- "+text)
+                        $(this).html(text);
+                        });
+
+                    </script>
+                    
+
+                    {% endif %}
+                        {% if post.image %}
+                            <img class="card-img profile blur" height="375px" src="https://drive.google.com/thumbnail?id=19s9HLijaKopNDDWZ2TFYmxehLHybqkSj" id="i{{post.id}}">
+                            <script type="text/javascript">
+                                var img_S2{{ post.id }} = document.getElementById("i{{ post.id }}")
+                                var img_B2{{ post.id }} = document.createElement('img')
+                                img_B2{{ post.id }}.onload = function(){
+                                    img_S2{{ post.id }}.src = this.src
+                                    img_S2{{ post.id }}.className = "card-img profile noblur";
+
+                            
+                                }
+                                setTimeout(function(){
+                                img_B2{{ post.id }}.src = '{{post.image.url}}' 
+                                },50)  
+
+                          
+                            </script>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="card-footer">
+                    {% if request.user.is_authenticated %}
+
+                        {% if request.user.profile in post.likes.all %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-primary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        {% else %}
+                            <a id="{{post.id}}" href="{{post.add_like_url}}" data-href="{{post.api_add_like_url}}" class="card-link text-secondary LikeBtn IconBtn "><i class="fa fa-heart "></i> <b class="LikeCount{{post.id}}" num='{{post.likes.count}}'>{{post.likes.count}}</b></a>
+                        
+                        {% endif %}
+
+                    {% else %}
+                        <a  href="{% url 'login' %}"  class="card-link text-secondary  IconBtn "><i class="fa fa-heart "></i> <b>{{post.likes.count}}</b></a>
+
+                    {% endif %}
+                        <n class="card-link text-secondary IconBtn"><i class="fa fa-comment"></i><b> {{post.comments_all.count}}</b></n>
+
+                        <a  id="c{{post.id}}" href="" link='http://localhost:8000{{post.get_absolute_url_2}}'  class="card-link text-secondary IconBtn ShareBtn"><i class="fa fa-share-alt"></i></a>
+                </div>
+            </div>
+            {% if request.user == post.author %}
+                <div class="modal fade" id="confirm-delete{{post.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Delete Post</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Are you sure you want to <b>delete</b> this post?</h5>
+                            </div>
+                            <div class="modal-footer">                   
+                                <a id="post{{post.slug}}" class="btn btn-danger btn-ok PostDelete " href="{{user.profile.get_absolute_url}}" data-href='{{post.delete_post_api_url}}'> 
+                                    Yes, Delete <b> </b>
+                                </a>
+                                <button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                <br class="d-block d-lg-none">
+
+
+
+    {% endfor %}
+    
+
+
+
+<div style="text-align: center;" class="loadingIcon"><h1 class=""></h1></div>
+</div>
+
+</div>
+
+    
+</div>
+
+
+
+
+<style type="text/css">
+.blur{
+filter: blur(2px);
+transition: all 1s;
+}
+
+.noblur{
+    transition: all 2s;
+}
+</style>
+
+
+
+{% endblock %}
+
+
+
+
+
+{% block javascript %}
+
+{% if user.is_authenticated %}
+
+
+<script type="text/javascript">
+
+
+$(function(){
+
+
+$('.LikeBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+
+    var LikeUrl = this_.attr("data-href")
+    var id = this_.attr("id")
+    $.ajax({
+        url: LikeUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+
+            if (data.like){
+
+                this_.attr('class','card-link text-primary LikeBtn IconBtn')
+                var likesOld = $('.LikeCount'+id).attr('num')
+                var likes = parseInt(likesOld)+1
+                $('.LikeCount'+id).attr('num',likes)
+                $('.LikeCount'+id).text(likes)
+                
+                
+            }
+            else{
+                this_.attr('class','card-link text-secondary LikeBtn IconBtn')
+                var likesOld2 = $('.LikeCount'+id).attr('num')
+                var likes2 = parseInt(likesOld2)-1
+                $('.LikeCount'+id).attr('num',likes2)
+                $('.LikeCount'+id).text(likes2)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+});
+
+
+
+});    
+
+function LikePostBtn(en){
+    var this_ = $('#'+ en.id)
+    
+    var LikeUrl = this_.attr("data-href")
+    var id = en.id
+    $.ajax({
+        url: LikeUrl,
+        method: 'GET',
+        data: {},
+        success: function (data) {
+            console.log(data)
+
+            if (data.like){
+
+                this_.attr('class','card-link text-primary LikeBtn IconBtn pointer')
+                var likesOld = $('.LikeCount'+id).attr('num')
+                var likes = parseInt(likesOld)+1
+                $('.LikeCount'+id).attr('num',likes)
+                $('.LikeCount'+id).text(likes)
+                
+                
+            }
+            else{
+                this_.attr('class','card-link text-secondary LikeBtn IconBtn pointer')
+                var likesOld2 = $('.LikeCount'+id).attr('num')
+                var likes2 = parseInt(likesOld2)-1
+                $('.LikeCount'+id).attr('num',likes2)
+                $('.LikeCount'+id).text(likes2)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+
+        }
+
+
+    })
+}
+
+</script>
+
+
+{% endif %}
+<script type="text/javascript">
+
+$('.ShareBtn').click(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    var id    = this_.attr('id')
+    var element = '#'+id
+    
+    var temp = $("<input>")
+    $("body").append(temp);
+    temp.val($(element).attr('link')).select();
+    document.execCommand("copy");
+    temp.remove();
+    $(".copyText").remove()
+    $(element).after('<i class="copyText"> link copied</i>')
+    $(".copyText").delay(2000).fadeOut( 400 )
+
+
+})
+
+
+function ShareBtnFunction(en){
+    var id = en.id
+    var element = '#'+id
+    var temp = $("<input>")
+    $("body").append(temp);
+    temp.val($(element).attr('link')).select();
+    document.execCommand("copy");
+    temp.remove();
+    $(".copyText").remove()
+    $(element).after('<i class="copyText"> link copied</i>')
+    $(".copyText").delay(2000).fadeOut( 400 )
+}
+
+var working = false;
+
+
+
+$(window).scroll(function(e){
+    e.preventDefault()
+    var this_ = $(this)
+    last_id = $(".PostData:last").attr("pk")
+
+    
+    if ($(this).scrollTop() + 1 >= $('body').height() - $(window).height()) {
+        //alert('1:'+working)
+        
+        
+        if (working == false) {
+            working = true
+            //alert('2:'+working)
+            $('.loadingIcon').children().attr('class','fa fa-cog fa-spin text-info display-4')
+            setTimeout(function() {
+                $('.loadingIcon').children().attr('class','')
+                
+                
+                }, 10000)
+
+        $.ajax({
+            url: '/loadmorepostsfollowings/',
+            method: 'GET',
+            data: {"last_id":last_id},
+
+            success: function (data) {
+                $('.loadingIcon').children().attr('class','')
+            
+                thedata = data.posts
+                console.log(thedata)
+                
+                $.each(thedata, function(i, value){
+                    console.log(i,value.fields.content,value.fields.author);
+                    var time = new Date(value.fields.date_posted)
+                    var date_posted2 = jQuery.timeago(time)
+                    var date_posted = date_posted2.replace("about","");
+                    
+                    var fields = value.fields
+                    var urls = value.urls
+                    var functions = value.functions
+
+                    var post_image = ''
+
+                    if (fields.image == false){
+                        post_image = ''
+                    }else {
+                        post_image = '<br><img class="card-img profile " height="375px" src="'+fields.image+'" id="i'+fields.id+'">'
+
+                                    
+
+                    }
+                    var follows_you = ''
+
+                    if (fields.follows_you == false){
+                        follows_you = ''
+                    }else {
+                        follows_you = ' | <n class="bg-light"> Follows You</n>'
+                    }
+
+                    var veryfied = ''
+
+                    if (fields.is_veryfied == false){
+                        veryfied = ''
+                    }else {
+                        veryfied = ' <li class="material-icons mb-1" data-toggle="tooltip" data-placement="top" title="Trusted" style="color:#007bff;">done_all</li>'
+                    }
+
+
+                    var dropdown = ''
+
+                    if (fields.post_for_you == false){
+                        dropdown = '<div class="dropdown"><button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button><div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1"><a class="dropdown-item" href="#">Report</a></div></div>'
+                    }else {
+                        dropdown = '<div class="dropdown"><button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button><div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1"><a class="dropdown-item" href="'+urls.post_edit_url+'">Edit</a><a class="dropdown-item" href="" data-toggle="modal" data-target="#confirm-delete'+fields.slug+'">Delete</a></div></div><div class="modal fade" id="confirm-delete'+fields.slug+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5>Delete Post</h5></div><div class="modal-body"><h5>Are you sure you want to <b>delete</b> this post?</h5></div><div class="modal-footer"><a id="post'+fields.slug+'"  class="pointer text-white btn btn-danger btn-ok PostDelete " onClick="DeletePostFunction(post'+ fields.slug +')" data-href="'+urls.post_delete_url+'">Yes, Delete <b> </b></a><button type="button" class="btn btn-default close1" data-dismiss="modal">Cancel</button></div></div></div></div>'
+                    }
+                    var liked = ''
+
+                    if (fields.liked == false){
+                        liked = '<a id="postnew'+ fields.id+'"  data-href="'+urls.api_add_like_url+'" onClick="LikePostBtn(postnew'+ fields.id +')" class="card-link text-secondary LikeBtn IconBtn pointer"><i class="fa fa-heart "></i> <b class="LikeCountpostnew'+ fields.id+'" num='+fields.likes+'>'+fields.likes+'</b></a>'
+                    }else {
+                        liked = '<a id="postnew'+ fields.id+'"  data-href="'+urls.api_add_like_url+'" onClick="LikePostBtn(postnew'+ fields.id +')" class="card-link text-primary LikeBtn IconBtn pointer"><i class="fa fa-heart "></i> <b class="LikeCountpostnew'+ fields.id+'" num='+fields.likes+'>'+fields.likes+'</b></a>'
+                    }
+
+                    
+                    var the_links = functions.links_all
+                    //var text = $(this).html()
+                   
+                    var the_content = fields.content
+                    if (the_links == ''){
+                        
+                    } else {  
+                            $.each(the_links, function(i, value){
+                                var link3 = value.replace(" ","");
+
+                                link4 = (link3.substr(0,30) + "...");
+
+                                the_content = the_content.replace(value," <a class='userlinkname' target='_blank' href='"+link3+"'>"+link4+"</a>");
+                            }) 
+
+                } 
+
+                    
+                    all_the_content = $("<a>", {href: urls.get_absolute_url_2, "class": "text-dark userlinkname"}).html('<div class="text-muted h7 mb-2"><i class="fa fa-clock-o"></i> '+date_posted+' </div><p id="content'+fields.id+'" class="card-text">'+the_content+'</p>'+post_image)
+                    
+                    
+
+                    var div_content = '<ee class="thedatapost'+fields.slug+'"></ee>'
+
+
+                    
+
+                    
+                    LoadTheNewPosts(
+                        the_content,
+                        value.pk,
+                        fields.slug,
+                        urls.profile_url,
+                        fields.id,
+                        fields.profile_image,
+                        fields.Name,
+                        fields.author,
+                        post_image,
+                        fields.likes,
+                        urls.get_absolute_url_2,
+                        date_posted,
+                        follows_you,
+                        veryfied,
+                        dropdown,
+                        functions.comments_all,
+                        liked,
+                        div_content,
+                        all_the_content
+                        )
+                    
+                });
+                setTimeout(function() {
+                    working = false;
+                    //alert('3:'+working)
+                }, 400)
+
+
+
+            },
+            error: function (error) {
+                
+                console.log(error)
+
+            }
+
+
+        })}
+    }
+});
+function LoadTheNewPosts(content,pk,slug,profile_url,post_id,profile_image,Name,username,post_image,likes,post_url,time,follows_you,is_veryfied,dropdown,comments_all,liked,div_content,all_the_content){
+    $(".PostData:last").after('<br class="d-block d-lg-none"><div class="card gedf-card PostData" id="idpost'+slug+'" pk="'+pk+'"><div class="card-header"><div class="d-flex justify-content-between align-items-center"><div class="d-flex justify-content-between align-items-center"><div class="profile-card-22 ml-3"><a href="'+profile_url+'"><img  id="p'+post_id+'" class="rounded-circle profile " width="45" height="45" src="'+profile_image+'" alt=""></a></div><div><a href="'+profile_url+'" class="card-title userlinkname"><div class="h5 m-0 ">'+Name+is_veryfied+'</div></a><div class="h7 text-muted">'+username + follows_you+'</div></div></div><div>{% if request.user.is_authenticated %}'+dropdown+'{% endif %}</div></div></div><div class="card-body">'+div_content+'</div><div class="card-footer">{% if request.user.is_authenticated %}'+liked+'{% else %}<a  href="{% url "login" %}"  class="card-link text-secondary  IconBtn "><i class="fa fa-heart "></i> <b>'+likes+'</b></a>{% endif %}<n class="card-link text-secondary IconBtn"><i class="fa fa-comment"></i><b> '+comments_all+'</b></n><a  id="c'+post_id+'" onClick="ShareBtnFunction(c'+ post_id +')" link="http://localhost:8000'+post_url+'"  class="card-link text-secondary IconBtn ShareBtn pointer"><i class="fa fa-share-alt"></i></a></div></div>')
+
+    $(".thedatapost"+slug).append(all_the_content)
+    
+}
+
+
+</script>
+
+
+
+{% endblock javascript %}
+
+
+                            

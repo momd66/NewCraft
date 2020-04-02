@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import Home
+from .views import PostListRecommended,FollowedPosts
 
 urlpatterns = [
-    path('', Home.as_view(),name='home'),
+    path('', PostListRecommended.as_view(),name='home'),
+    path('following/', FollowedPosts.as_view(),name="following-list"),
 ]
